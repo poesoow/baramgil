@@ -22,3 +22,16 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### test
+git clone 깃허브주소
+
+git branch -a
+
+git add .
+
+git commit -m '커밋내용'
+
+git push -u origin 자기성
+오류 발생 시
+git pull origin song main
