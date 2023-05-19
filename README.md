@@ -28,13 +28,15 @@ git clone 깃허브주소
 
 git branch -a
 
-git switch -t origin/브랜치명(자기성)
+git switch -t origin/kim
+
+작업 후
 
 git add .
 
 git commit -m '커밋내용'
 
-git push -u origin 브랜치명(자기성)
+git push -u origin kim
 오류 발생 시
 git pull origin song main
 
