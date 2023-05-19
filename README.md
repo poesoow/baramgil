@@ -36,6 +36,6 @@ git commit -m '커밋내용'
 
 git push -u origin gu
 오류 발생 시
-git pull origin song main
+git pull origin GU main
 
 테스트
