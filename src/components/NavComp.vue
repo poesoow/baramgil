@@ -1,24 +1,27 @@
 <template>
   <!-- 햄버거 아이콘 -->
   <font-awesome-icon icon="bars"
-  class="lg:hidden cursor-pointer h-8 fixed right-7 top-10 md:top-[90px] z-50"
+
+  class="lg:hidden cursor-pointer h-8 fixed right-2 sm:top-7 md:top-[50px] z-50"
+
   @click="btnMenu == true ? btnMenu = false : btnMenu = true" />
   <!-- 햄버거 아이콘 -->
 
   <!-- 전체 네비게이션 시작 -->
-  <div class="w-full min-w-[640px] h-28 z-10 lg:sticky top-0 bg-white/80 lg:mb-0 sm:mb-44 md:mb-38 mb-32 duration-300 transition-all">
+  <div class="w-full h-full z-10 lg:sticky top-0 bg-white/80 lg:mb-0 sm:mb-44 md:mb-38 mb-32 duration-300 transition-all">
 
     <!-- @click="btnMenu == true ? btnMenu = false : btnMenu = true" -->
-    <div class="max-w-7xl min-w-[640px] mx-auto ">
+    <div class="max-w-7xl min-w-[640px] mx-auto">
       <div class="w-full  mr-[2%] flex justify-end ">
         <!-- 사이트 로고 -->
         <a href="" class="lg:hidden"><img src="https://via.placeholder.com/200x60" alt="사이트 로고"
           class="pt-4 sm:-ml-[95%] md:ml-[70%]  duration-300 transition-all">
         </a>
         <!-- 네비게이션 Lnb -->
-        <div class="md:ml-[30%] lg:mr-[2%] sm:absolute top-[65px] left-[3%] md:top-0 md:static duration-500 transition-all">
-          <ul class="flex text-xl gap-x-7 pt-5 pr-2  ">
-            <li v-if="logIn == false" class="hover:underline hover:underline-offset-4 font-semibold">로그인</li>
+        <div class="md:ml-[30%] lg:mr-[2%] sm:absolute top-[65px] left-[3%] md:top-0 md:static duration-500 transition-all py-4">
+          <ul class="flex gap-x-7 pb-3 pr-2  ">
+            <li v-if="logIn == false" class="hover:underline hover:underline-offset-4 font-semibold relative">로그인
+            </li>
             <li v-if="logIn == false" class="hover:underline hover:underline-offset-4 font-semibold">회원가입</li>
             <li v-if="logIn == true" class="hover:underline hover:underline-offset-4 font-semibold">마이 페이지</li>
             <li v-if="logIn == true" class="hover:underline hover:underline-offset-4 font-semibold">로그 아웃</li>

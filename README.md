@@ -28,15 +28,17 @@ git clone 깃허브주소
 
 git branch -a
 
-git switch -t origin/song
+
+git switch -t origin/kim
 
 git add .
 
 git commit -m '커밋내용'
 
-git push -u origin song
+
+git push -u origin kim
+
 오류 발생 시
-git pull origin song main
 
 테스트
 
