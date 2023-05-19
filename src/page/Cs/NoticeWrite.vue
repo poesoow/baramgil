@@ -14,11 +14,12 @@
         <input v-model="title" type="text" class="basis-[calc(100%-112px)] px-2 py-0.5" placeholder="제목">
       </div>
       <input type="file" class="shadow appearance-none border rounded-sm w-full mb-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image">
+      <input type="checkbox" v-model="isChecked" name="fixed" id="fixed"><label for="fixed" class="px-1">상단고정</label>
       <textarea v-model="content" class="border rounded-sm w-full h-72 mb-4"></textarea>
       <div class="w-full relative">
         <button class="bg-slate-400 hover:bg-slate-600 focus:ring-indigo-400 py-2 px-6 text-white font-semibold rounded shadow-md focus:outline-none focus:right-2 focus:ring-opacity-75 text-xs sm:text-sm absolute right-0" @click="Write()">완료</button>
       </div>
-      {{ fileRandom }}
+      {{ isChecked }}
     </div>
   </div>
 </template>
@@ -34,7 +35,9 @@ export default {
       name: this.$store.state.displayName,
       file: "",
       date: new Date(),
-      fileRandom: null
+      fileRandom: null,
+      isChecked : false,
+      fixed : false,
     }
   },
   mounted(){
@@ -54,7 +57,11 @@ export default {
           return formattedDate;
     },
     Write(){
-      
+      if(this.isChecked){
+        this.fixed = true
+      }else{
+        this.fixed = false
+      }
       this.file = document.querySelector("#image").files[0];
       if(this.file){
         storage.ref().child("images/" + this.fileRandom).put(this.file).then(() => {
@@ -68,7 +75,8 @@ export default {
             "good" : 0,
             "bad" : 0,
             "uid" : this.$store.state.uid,
-            "file" : url
+            "file" : url,
+            "fixed" : this.fixed
           })
         this.$router.replace("/cs/notice")
           })
@@ -82,7 +90,8 @@ export default {
           "hit" : 1,
           "good" : 0,
           "bad" : 0,
-          "uid" : this.$store.state.uid
+          "uid" : this.$store.state.uid,
+          "fixed" : this.fixed
         })
         this.$router.replace("/cs/notice")
       }

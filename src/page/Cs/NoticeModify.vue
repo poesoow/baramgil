@@ -14,6 +14,7 @@
     </div>
   </div>
   <div class="w-9/12 mx-auto">
+    <input type="checkbox" v-model="isChecked" name="fixed" id="fixed"><label for="fixed" class="px-1 mb-2">상단고정</label>
     <textarea v-model="content" placeholder="변경할 내용" class="border w-full h-72 mb-4 px-2 py-0.5"></textarea>
   </div>
   <div class="w-9/12 mx-auto flex justify-end mb-10">
@@ -31,15 +32,23 @@ export default {
       title: "",
       content: "",
       date: new Date(),
+      isChecked : false,
+      fixed : false,
     }
   },
   methods: {
     Modify() {
+      if(this.isChecked){
+        this.fixed = true
+      }else{
+        this.fixed = false
+      }
       db.collection("notice").doc(this.$store.state.noticeId).update({
         "name": this.name,
         "title": this.title,
         "content": this.content,
         "date": this.date,
+        "fixed": this.fixed,
       }).then(() => {
         alert("수정이 완료되었습니다.")
         this.$router.replace("/cs/notice")
@@ -55,6 +64,7 @@ export default {
       this.name = this.BoardContent.name
       this.title = this.BoardContent.title
       this.content = this.BoardContent.content
+      this.fixed = this.BoardContent.fixed
     })
   },
 }

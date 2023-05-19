@@ -1,9 +1,16 @@
 <template lang="">
+  <div class="w-full px-[5%]">
+    <div class="xl:w-full h-11 mx-1.5 box-border flex justify-end gap-x-[15px]">
+      <input type="text" placeholder="검색어를 입력하세요" class="w-[271px] h-full py-[9px] pl-2 border border-[#555555] box-border rounded-[10px]">
+      <button class="w-[72px] h-full border rounded-[10px] text-center bg-[#d9d9d9] shadow">버튼</button>
+    </div>
+  </div>
   <div class="basis-full px-[5%]">
     <div class="max-w-7xl mx-auto my-10">
       <ul class="flex justify-between border-t-indigo-500 border-t-2 p-4 py-2 bg-indigo-50">
+        <li class="basis-1/12 text-center">상단고정</li>
         <li class="basis-1/12 text-center">번호</li>
-        <li class="basis-4/12 text-center">제목</li>
+        <li class="basis-3/12 text-center">제목</li>
         <li class="basis-2/12 text-center">글쓴이</li>
         <li class="basis-2/12 text-center">날짜</li>
         <li class="basis-1/12 text-center">조회수</li>
@@ -12,8 +19,10 @@
       </ul>
       <template v-for="(e, index) in dataList" :key="index">
         <ul v-if="calculateNumber(totalLength, perPage, page, index) > 0" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
+          <li v-if="e.fixed === true" class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
+          <li v-else class="basis-1/12 text-center"></li>
           <li class="basis-1/12 text-center">{{ calculateNumber(totalLength, perPage, page, index) }}</li>
-          <li class="basis-4/12 text-center"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
+          <li class="basis-3/12 text-center line-clamp-1"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
           <li class="basis-2/12 text-center">{{ e.name }}</li>
           <li class="basis-2/12 text-center">{{ BoardDate(index) }}</li>
           <li class="basis-1/12 text-center">{{ e.hit }}</li>
@@ -48,7 +57,7 @@ export default {
       dataId: [],
       posts: [],
       page: 1,
-      perPage: 5,
+      perPage: 10,
       lastVisible: null,
       totalLength : 0,
       block: 5,
@@ -71,7 +80,6 @@ export default {
     },
   },
   methods: {
-
     goToPage(e){
       this.page = e,
       this.fetchPost()
@@ -84,8 +92,6 @@ export default {
     nextPage(){
       this.currentPage = this.currentPage + 1;
       this.page = this.pageCount.pagination[0];
-
-
       this.fetchPost();
     },
 
@@ -135,7 +141,7 @@ export default {
       if(postIndex <= 0){
         return
       }
-
+      console.log(totalLength, totalPages, index, postIndex)
       return postIndex;
     },
   },
