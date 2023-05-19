@@ -1,7 +1,9 @@
 <template>
   <!-- 햄버거 아이콘 -->
   <font-awesome-icon icon="bars"
+
   class="lg:hidden cursor-pointer h-8 fixed right-2 sm:top-7 md:top-[50px] z-50"
+
   @click="btnMenu == true ? btnMenu = false : btnMenu = true" />
   <!-- 햄버거 아이콘 -->
 
