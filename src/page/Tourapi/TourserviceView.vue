@@ -20,10 +20,7 @@
     </p>
     <p class="text-3xl font-bold max-w-6xl mx-auto px-3 mt-6 flex justify-between">
       <span><span class=" text-blue-500">{{ selectAreaName }}</span><span> 인기 {{ selectContentTypeName }}</span></span>
-      <ul class="flex text-xl items-end gap-3">
-        <li @click="selectarrange('O'); fetchData()">제목순</li>
-        <li @click="selectarrange('R'); fetchData()">수정일순</li>
-      </ul>
+     
     </p>
 
     <p class="border mt-3 mb-6">
@@ -85,9 +82,6 @@ export default {
     this.fetchData()
   },
   methods: {
-    selectarrange(arrange) {
-      this.selectArrange = arrange
-    },
     fetchMore() {
       alert('작업필요')
     },
