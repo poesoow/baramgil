@@ -29,18 +29,13 @@ git clone 깃허브주소
 git branch -a
 
 
-git switch -t origin/kim
+git switch -t origin/ooo
 
 git add .
 
 git commit -m '커밋내용'
 
-
-git push -u origin kim
-
-오류 발생 시
-
-테스트
+git push -u origin ooo
 
 
 ### 작업 추가 필요

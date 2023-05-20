@@ -1,6 +1,7 @@
 <template lang="">
   <div class="basis-full">
     <div class="max-w-7xl mx-auto my-10">
+      <FAQ />
       <ul class="flex justify-between border-t-indigo-500 border-t-2 p-4 py-2 bg-indigo-50">
         <li class="basis-1/12 text-center">번호</li>
         <li class="basis-4/12 text-center">제목</li>
@@ -13,7 +14,7 @@
       <template v-for="(e, index) in dataList" :key="index">
         <ul v-if="calculateNumber(totalLength, perPage, page, index) > 0" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
           <li class="basis-1/12 text-center">{{ calculateNumber(totalLength, perPage, page, index) }}</li>
-          <li class="basis-4/12 text-center"><router-link :to="{ name: 'QnaRead', query:{ docId: dataId[index] } }" @click="$store.commit('QnaRead', dataId[index])">{{ e.title }}</router-link></li>
+          <li class="basis-4/12 text-center line-clamp-1"><router-link :to="{ name: 'QnaRead', query:{ docId: dataId[index] } }" @click="$store.commit('QnaRead', dataId[index])">{{ e.title }}</router-link></li>
           <li class="basis-2/12 text-center">{{ e.name }}</li>
           <li class="basis-2/12 text-center">{{ BoardDate(index) }}</li>
           <li class="basis-1/12 text-center">{{ e.hit }}</li>
@@ -40,16 +41,20 @@
 </template>
 <script>
 import { db } from "../../firebase"
+import FAQ from "@/page/Cs/FaqView.vue"
 
 export default {
   name: "QnaList",
+  components: {
+    FAQ
+  },
   data() {
     return {
       dataList: [],
       dataId: [],
       posts: [],
       page: 1,
-      perPage: 5,
+      perPage: 10,
       lastVisible: null,
       totalLength : 0,
       block: 5,
