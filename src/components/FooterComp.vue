@@ -1,45 +1,40 @@
 <template>
-  <div class="w-full h-auto bg-white px-[2%]">
-    <div class="mx-auto max-w-7xl transition-all duration-700">
-      <!-- 푸터 상단 제목 -->
-      <h3 class="text-center sm:text-lg md:text-[20px] lg:text-2xl tracking-widest pt-6 transition-all duration-300">
-        <font-awesome-icon icon="thumbs-up" class="text-gray-500 mr-1 invisible lg:visible" />SNS에서 만나보세요!
-      </h3>
-      <!-- 푸터 상단 제목 -->
-
+  <div class="w-full mx-auto h-auto px-[2%] border-t pt-8 transition-all duration-700 md:relative">
+    <div class="max-w-5xl mx-auto">
+      <!-- 배너 이미지 -->
+      <div class="lg:flex justify-center border-b px-2 pb-8">
+        <ul class="flex justify-center gap-x-3 sm:gap-x-4 md:gap-x-[2%] lg:gap-x-[68px] xl:gap-x-[78px] transition-all duration-500 pt-2 ">
+          <li v-for="(e, index) in 5" :key="e" class=" transition-all duration-500">
+            <img :src="require(`../assets/images/footer/ft_banner${index+1}.png`)" alt="푸터 배너" class="lg:w-[180px] md:w-[150px] sm:w-[140px] w-[100px]  transition-all duration-500">
+          </li>
+        </ul>
+      </div>
+      <!-- 배너 이미지 -->
+      
       <!-- SNS 아이콘 -->
-      <div class="border-b pb-6 mt-6 transition-all duration-500">
-        <ul class="flex justify-center lg:gap-x-12 ml-3 md:gap-x-8 sm:gap-x-6">
+      <div class="pb-3 mt-6 transition-all duration-500 md:absolute md:right-0 md:mr-[2%] lg:mr-[4%] md:mt-[3%] xl:mr-[13%] 2xl:mr-[19%]">
+        <ul class="flex justify-center lg:gap-x- ml-3 md:gap-x-1 sm:gap-x-6">
           <li v-for="(e, index) in ImgDesc" :key="e" class="flex gap-x-5 ">
             <img :src="require(`../assets/images/footer/icon${index+1}.png`)" alt="SNS 아이콘"
-            class="lg:w-16 lg:h-14 sm:w-6 sm:h-7 sm:pt-1 sm:mt-0.5 transition-all duration-300">
-            <span class="sm:pt-1.5 lg:pt-[18px] pl-1.5 -ml-5 mr-7 sm:text-[16px] lg:text-xl transition-all duration-300 tracking-widest">{{ e }}</span>
+            class="lg:w-8 lg:h-8 w-7 h-7 transition-all duration-300 rounded-xl mr-3">
           </li>
         </ul>
       </div>
       <!-- SNS 아이콘 -->
 
-      <!-- 배너 이미지 -->
-      <div class="lg:flex justify-center just my-6 px-2">
-        <ul class="flex  justify-center sm:gap-x-4 md:gap-x-[2%] lg:gap-x-[68px] xl:gap-x-[78px] transition-all duration-500">
-          <li v-for="(e, index) in 5" :key="e" class=" transition-all duration-500">
-            <img :src="require(`../assets/images/footer/ft_banner${index+1}.png`)" alt="푸터 배너" class="lg:w-[180px] md:w-[150px] sm:w-[140px]  transition-all duration-500">
-          </li>
+      <!-- 텍스트 -->
+      <div class="pb-8 sm:gap-x-5  lg:gap-x-10 mt-4 px-2 transition-all duration-500 tracking-tighter lg:tracking-widest  md:tracking-tight text-xs md:text-sm text-slate-700">
+        <ul class="flex flex-wrap justify-center mb-5 md:justify-start md:gap-x-6 gap-x-10">
+          <li v-for="e in FooterTxt[0]" :key="e" class="shrink-0">{{ e }}</li>
         </ul>
+        <ul class="flex flex-wrap justify-center md:mb-5 md:justify-start md:gap-x-6 gap-x-4">
+          <li v-for="e in FooterTxt[1]" :key="e" class="sm:mb-3 md:mb-0 shrink-0">{{ e }}</li>
+        </ul>
+        <p class="text-center text-sm md:text-left mt-3 md:mt-0">CopyRight © 2023 Team-Project. All Rights Reserved.</p>
       </div>
-      <!-- 배너 이미지 -->
+      <!-- 텍스트 -->
 
-      <!-- 텍스트 -->
-      <!-- border-b -->
-      <div class="pb-8 sm:gap-x-5 md:gap-x-8 lg:gap-x-12 mt-4 px-2 transition-all duration-500 lg:tracking-widest md:tracking-wide ">
-        <ul class="flex flex-wrap gap-x-8 text-[16px] mb-3">
-          <li v-for="e in FooterTxt[0]" :key="e" class="first-of-type:text-red-500/90">{{ e }}</li>
-        </ul>
-        <ul class="flex flex-wrap gap-x-10 text-[16px]">
-          <li v-for="e in FooterTxt[1]" :key="e" class="sm:mb-3 md:mb-0">{{ e }}</li>
-        </ul>
-      </div>
-      <!-- 텍스트 -->
+      
 
       <!-- 저작권 관련 로고 이미지 / 한국관광공사, 투어API, 문화체육관광부 -->
       <!-- <div class="flex justify-center py-6">

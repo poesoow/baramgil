@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../page/HomePage.vue'
+
 import TourapiPage from '../page/TourapiPage.vue'
+import TourserviceView from '../page/Tourapi/TourserviceView'
+import TourcourseView from '../page/Tourapi/TourcourseView'
 
 import CsPage from '../page/CsPage.vue'
 
@@ -27,7 +30,20 @@ const routes = [
   {
     path: '/tour',
     name: 'tourapi',
-    component: TourapiPage
+    component: TourapiPage,
+    redirect: '/tour/info',
+    children: [
+      {
+        path: "/tour/info",
+        name: "TourserviceView",
+        component: TourserviceView
+      },
+      {
+        path: "/tour/course",
+        name: "TourcourseView",
+        component: TourcourseView
+      }
+    ]
   },
   {
     path: '/cs',
