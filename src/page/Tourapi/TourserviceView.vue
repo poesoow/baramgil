@@ -28,11 +28,11 @@
     <p class="mt-3 mb-14">
       <ul class="flex gap-[30px] flex-wrap justify-center">
         <li v-for="data in dataList" :key="data" class="md:basis-1/4">
-          <a href="#">
-            <img :src="data.firstimage" :alt="data.title" class="block w-full rounded-xl h-96">
-            <div>{{ data.title }}</div>
-            <div>{{ simpleAddress(data.addr1) }}</div>
-          </a>
+          <router-link to="/tour/detail" @click="$store.commit('detailInfo', data)">
+              <img :src="data.firstimage" :alt="data.title" class="block w-full rounded-xl h-96">
+              <div>{{ data.title }}</div>
+              <div>{{ simpleAddress(data.addr1) }}</div>
+          </router-link>
         </li>
       </ul>
     </p>
