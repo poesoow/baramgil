@@ -1,4 +1,5 @@
 <template>
+  <Title>여행정보</Title>
   <div>
     <p class="my-12 text-2xl max-w-6xl mx-auto">
       <ul class="flex gap-4 mx-auto justify-center">
@@ -45,9 +46,13 @@
 <script>
 import tourData from '@/assets/tourData.json'
 import axios from 'axios'
+import Title from '@/components/TitleComp.vue'
 
 export default {
   name: 'TourserviceView',
+  components: {
+    Title
+  },
   data() {
     return {
       baseURL: 'https://apis.data.go.kr/B551011/KorService1/',
