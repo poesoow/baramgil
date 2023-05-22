@@ -1,12 +1,12 @@
 <template>
-  <HomeComp />
+  <HomeView />
 </template>
 <script>
-import HomeComp from '@/page/Home/HomeComp.vue'
+import HomeView from '@/page/Home/HomeView.vue'
 export default {
   name: "HomePage",
   components:{
-    HomeComp,
+    HomeView,
   }
 }
 </script>

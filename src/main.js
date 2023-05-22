@@ -5,8 +5,9 @@ import store from './store'
 import "./index.css"
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faMoon, faSun, faGlobe, faPencil, faBars, faSearch, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+
+import { faMoon, faSun, faGlobe, faPencil, faBars, faSearch, faThumbsUp, faChevronUp, faChevronDown, faA, faQ, faThumbTack} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faMoon, faSun, faGlobe, faPencil, faBars, faSearch, faThumbsUp)
+library.add(faMoon, faSun, faGlobe, faPencil, faBars, faSearch, faThumbsUp, faChevronUp, faChevronDown, faA, faQ, faThumbTack)
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).use(store).mount('#app')
