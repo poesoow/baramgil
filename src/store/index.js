@@ -9,6 +9,7 @@ export default createStore({
     noticeId: 0,
     onlineId: 0,
     qnaId: 0,
+    reviewId: 0,
     galleryId: 0,
     data: null
   },
@@ -19,6 +20,9 @@ export default createStore({
       state.noticeId = payload
     },
     QnaRead(state, payload) {
+      state.qnaId = payload
+    },
+    ReviewRead(state, payload) {
       state.qnaId = payload
     },
     detailInfo(state, payload) {

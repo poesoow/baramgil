@@ -5,47 +5,33 @@
       <button class="w-[72px] h-full border rounded-[10px] text-center bg-[#d9d9d9] shadow">버튼</button>
     </div>
   </div>
+  <div class="w-full px-[5%] mt-16 flex justify-end gap-x-10">
+    <p class="text-center relative after:absolute after:w-[1px] after:h-[20px] after:top-[2px] after:left-[63px] after:bg-black">일자별</p>
+    <p class="text-center">추천순</p>
+  </div>
   <div class="basis-full px-[5%]">
     <div class="max-w-7xl mx-auto my-10">
       <ul class="flex justify-between border-t-indigo-500 border-t-2 p-4 py-2 bg-indigo-50">
-        <li class="basis-1/12 text-center">상단고정</li>
         <li class="basis-1/12 text-center">번호</li>
-        <li class="basis-3/12 text-center">제목</li>
-        <li class="basis-2/12 text-center">글쓴이</li>
-        <li class="basis-2/12 text-center">날짜</li>
+        <li class="basis-5/12 text-center">제목</li>
+        <li class="basis-2/12 text-center">작성자</li>
+        <li class="basis-2/12 text-center">작성일</li>
+        <li class="basis-1/12 text-center">추천수</li>
         <li class="basis-1/12 text-center">조회수</li>
-        <li class="basis-1/12 text-center">추천</li>
-        <li class="basis-1/12 text-center">비추천</li>
       </ul>
-      <template v-for="(e,index) in NoticeArray" :key="e">
-        <ul v-if="e.fixed" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
-          <li class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
-          <li class="basis-1/12 text-center">공지</li>
-          <li class="basis-3/12 text-center line-clamp-1"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
-          <li class="basis-2/12 text-center">{{ e.name }}</li>
-          <li class="basis-2/12 text-center">{{ BoardDate(index) }}</li>
-          <li class="basis-1/12 text-center">{{ e.hit }}</li>
-          <li class="basis-1/12 text-center">{{ e.good }}</li>
-          <li class="basis-1/12 text-center">{{ e.bad }}</li>
-        </ul>
-      </template>
       <template v-for="(e, index) in dataList" :key="index">
-          <ul v-if="calculateNumber(totalLength, perPage, page, index) > 0 && e.fixed == false" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
-          <li v-if="e.fixed === true" class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
-          <li v-else class="basis-1/12 text-center"></li>
-          
-          <li class="basis-1/12 text-center" v-if="e.fixed != true">{{totalLength - index}}</li>
-          <li class="basis-3/12 text-center line-clamp-1"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
+        <ul v-if="calculateNumber(totalLength, perPage, page, index) > 0" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
+          <li class="basis-1/12 text-center">{{ calculateNumber(totalLength, perPage, page, index) }}</li>
+          <li class="basis-5/12 text-center line-clamp-1"><router-link :to="{ name: 'ReviewRead', query:{ docId: dataId[index] } }" @click="$store.commit('ReviewRead', dataId[index])">{{ e.title }}</router-link></li>
           <li class="basis-2/12 text-center">{{ e.name }}</li>
           <li class="basis-2/12 text-center">{{ BoardDate(index) }}</li>
-          <li class="basis-1/12 text-center">{{ e.hit }}</li>
           <li class="basis-1/12 text-center">{{ e.good }}</li>
-          <li class="basis-1/12 text-center">{{ e.bad }}</li>
-        </ul>  
+          <li class="basis-1/12 text-center">{{ e.hit }}</li>
+        </ul>
       </template>
     </div>
     <div class="flex justify-end pb-24">
-      <router-link to="/cs/notice/write" class="bg-indigo-400 hover:bg-indigo-600 focus:ring-indigo-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">글쓰기</router-link>
+      <router-link to="/cs/review/write" class="bg-indigo-400 hover:bg-indigo-600 focus:ring-indigo-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">글쓰기</router-link>
     </div>
   </div>
   <div class="flex justify-center basis-full gap-x-5">
@@ -54,21 +40,20 @@
     {{ e }}</button>
     <button @click="nextPage" :disabled = "currentPage >= pageCount.totalPage / block">다음</button>
   </div>
+  {{ $store.state.loginToken }}
   {{ pageCount.pagination }}
   {{ page }}
   {{ currentPage }}
   {{ pageCount.pagination[0] }}
 </template>
 <script>
-
 import { db } from "../../firebase"
 
 export default {
-  name: "NoticeList",
+  name: "ReviewList",
   data() {
     return {
       dataList: [],
-      dataNoticeList : [],
       dataId: [],
       posts: [],
       page: 1,
@@ -76,7 +61,6 @@ export default {
       lastVisible: null,
       totalLength : 0,
       block: 5,
-      NoticeArray : [],
       currentPage: 1,
     }
   },
@@ -96,6 +80,7 @@ export default {
     },
   },
   methods: {
+
     goToPage(e){
       this.page = e,
       this.fetchPost()
@@ -108,6 +93,8 @@ export default {
     nextPage(){
       this.currentPage = this.currentPage + 1;
       this.page = this.pageCount.pagination[0];
+
+
       this.fetchPost();
     },
 
@@ -122,14 +109,15 @@ export default {
 
 
     fetchTotalLength(){
-      db.collection("notice").get().then((data) => {
+      db.collection("review").get().then((data) => {
         this.totalLength = data.size
         console.log(data.size)
       })
     },
     fetchPost(){
 
-      let query = db.collection("notice").orderBy("date", "desc").limit(this.perPage)
+      let query = db.collection("review").orderBy("good", "desc").orderBy("date", "desc").limit(this.perPage)
+      // let query = db.collection("review").orderBy("good").orderBy("date", "desc")
       
       if(this.page > 1 && this.lastVisible){
         query = query.startAfter(this.lastVisible);
@@ -143,19 +131,12 @@ export default {
           ids.push(e.id);
           items.push(e.data())
         })
+
         this.dataId = ids;
         this.dataList = items;
-
-        const count = this.dataList.filter(e => e.fixed === true).length;
-        this.NoticeArray = this.dataList.filter(e=>e.fixed === true);
-
-        this.dataList = this.dataList.filter(e=>e.fixed === false);
-
-        
-        this.totalLength = this.totalLength - count;
-        
         this.lastVisible = data.docs[data.docs.length - 1]
-          
+        console.log(this.dataList)
+
       })
     },
     calculateNumber(totalLength, perPage, page, index){
@@ -164,7 +145,7 @@ export default {
       if(postIndex <= 0){
         return
       }
-      
+
       return postIndex;
     },
   },
