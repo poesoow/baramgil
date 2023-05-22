@@ -42,6 +42,10 @@ git push -u origin ooo
 pull request 요청
 아래 내용에는 작업한 내용 적기
 
+
+내용 작업 후
+
+
 ### 첫날 제외 다른 날 또는 push 가 안되는 경우
 git pull --no-rebase origin ooo
 
