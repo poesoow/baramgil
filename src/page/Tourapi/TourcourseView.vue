@@ -11,18 +11,22 @@
     <p class="text-3xl font-bold max-w-6xl mx-auto px-3 mt-6 flex justify-center">
       <span><span class=" text-blue-500">{{ selectAreaName }}</span><span> 숨은 여행지</span></span>
     </p>
-
-    <p class="border mt-3 mb-6">
-      <ul class="flex flex-wrap gap-x-3.5">
-        <li v-for="(data, index) in dataList" :key="index" class="basis-full border rounded-md mb-20 relative flex flex-wrap items-center">
-          <div>
+    <p class="text-center my-4">지역 주민 추천 여행지</p>
+    <!-- even 짝tn odd 홀tn -->
+    <p class="mt-3 mb-6">
+      <ul class="flex flex-wrap basis-full">
+        <li v-for="(data, index) in dataList" :key="index" class="basis-full group justify-start odd:justify-end odd:text-left rounded-md mb-20 relative flex flex-wrap">
+          <div class="basis-[47%]  text-center mx-2">
+            <img src="https://via.placeholder.com/400x300" alt="임시 이미지" class="mx-auto w-[70%] py-4">
+          </div>
+          <div class="basis-[47%]">
             <h3 class="my-3">{{ data.crsKorNm }}</h3>
             <p class="mb-3">{{ data.crsCycle }}</p>
+            <p class="mb-3" v-html="data.crsContents"></p>
+            <p class="mb-3" v-html="data.crsTourInfo"></p>
+            <p class="mb-3" v-html="data.travelerinfo"></p>
+            <!-- <p class="mb-3"> 경로 파일 {{ data.gpxpath }}</p> -->
           </div>
-          <p class="mb-3" v-html="data.crsContents"></p>
-          <p class="mb-3" v-html="data.crsTourInfo"></p>
-          <p class="mb-3"> 경로 파일 {{ data.gpxpath }}</p>
-          <p class="mb-3" v-html="data.travelerinfo"></p>
         </li>
       </ul>
       <template v-if="true">
@@ -42,6 +46,8 @@
     name: 'TourerviceView',
      data() {
     return {
+      img: "https://via.placeholder.com/300x200",
+      
       baseURL: 'https://apis.data.go.kr/B551011/Durunubi/',
       serviceKey: 'vZqohu%2F1a1mKILW%2BslUEpMtWGBv0IvvlkE7zB28hKgPXkvzNMi9%2F2sawykKToWPc%2F%2FNeUM9rnQykkPu%2FLdPlpQ%3D%3D',
       areaCode: '',
@@ -57,7 +63,7 @@
       arrange: 'R',
       selectArrange: 'R', // 정렬구분 (A=제목순, C=수정일순, D=생성일순) 대표이미지가반드시있는정렬(O=제목순, Q=수정일순, R=생성일순)
       /* 공통 */
-      numOfrows: 12, // 한페이지 결과 수
+      numOfrows: 3, // 한페이지 결과 수
       pageNo: 1, // 페이지 번호
       Mobileos: 'ETC', // OS 구분 : IOS (아이폰), AND (안드로이드), WIN (윈도우폰), ETC(기타)
       listYN: 'Y', // 목록구분(Y=목록, N=개수)
