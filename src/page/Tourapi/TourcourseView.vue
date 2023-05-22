@@ -15,6 +15,7 @@
       <span> <span class=" text-blue-500">{{ selectAreaName ? selectAreaName : '지역' }}</span><span> 숨은 여행지</span></span>
     </p>
 
+
     <p class="mt-3 mb-6">
 
       <div v-for="(data, index) in dataList" :key="data" class="basis-full border rounded-md mb-20 relative flex flex-wrap items-center group">
@@ -23,8 +24,13 @@
         </div>
         <div class="basis-full md:basis-2/4 md:group-even:left-14 md:group-odd:-left-14 group-odd:order-2 group-even:text-right group-even:order-1 relative z-10 px-7 sm:px-16 py-5 box-border">
           <div>
+
             <h3 class="my-3">{{ data.crsKorNm }}</h3>
             <p class="mb-3">{{ data.crsCycle }}</p>
+            <p class="mb-3" v-html="data.crsContents"></p>
+            <p class="mb-3" v-html="data.crsTourInfo"></p>
+            <p class="mb-3" v-html="data.travelerinfo"></p>
+            <!-- <p class="mb-3"> 경로 파일 {{ data.gpxpath }}</p> -->
           </div>
           <p class="mb-3" v-html="data.crsContents"></p>
           <button @click="openModal(index)">자세히 보기</button>

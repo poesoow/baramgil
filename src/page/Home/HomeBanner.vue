@@ -15,10 +15,42 @@
   <!-- 상단 배너 슬라이드 영역 -->
 </template>
 <script>
+import 'swiper/css';
+import 'swiper/css/bundle';
+import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Navigation, Pagination, Autoplay } from 'swiper';
 export default {
-  name:"HomeBanner"
+  name:"HomeBanner",
+  data() {
+    return {
+      Modules: [Navigation, Pagination, Autoplay]
+    }
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
+  }
 }
 </script>
 <style>
-  
+.swiper-slide{
+  position:relative;
+}  
+.swiper-button-next{
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  color:white;
+  width:20px;
+}
+.swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  color:white;
+  width:20px;
+  height:30px;
+}
 </style>
