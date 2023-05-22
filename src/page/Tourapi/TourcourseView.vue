@@ -4,14 +4,14 @@
 
    <div class="w-full">
     <p class="my-12 text-1xl mx-auto">
-      <ul class="flex gap-5 max-w-6xl mx-auto justify-center">
+      <ul class="flex gap-5 max-w-5xl mx-auto justify-center">
         <li v-for="(area) in areaList" :key="area" @click="selectArea(area.code, area.name); fetchData()"
           :class="selectAreaCode == area.code && 'bg-slate-500 text-white rounded-md'">
           <div>{{ area.name2 }}</div>
         </li>
       </ul>
     </p>
-    <p class="text-3xl font-bold max-w-6xl mx-auto mt-6 flex text-left">
+    <p class="text-3xl font-bold max-w-5xl mx-auto mt-6 flex text-left">
       <span> <span class=" text-blue-500">{{ selectAreaName ? selectAreaName : '지역' }}</span><span> 숨은 여행지</span></span>
     </p>
 
@@ -31,8 +31,12 @@
           <Teleport to="body">
             <div v-if="isModal && (Number(index) == selectIndex)" class="fixed z-[100] top-[30%] left-[10%] w-4/5 bg-white">
               <p class="text-2xl">{{ data.crsKorNm }}</p>
+              <hr>
               <p class="mb-3" v-html="data.crsTourInfo"></p>
+              <p class="mb-3">{{ data.crsTourInfo }}</p>
+              <hr>
               <p class="mb-3" v-html="data.travelerinfo"></p>
+              <p class="mb-3">{{ data.travelerinfo }}</p>
               <button @click="closeModal">닫기</button>
             </div>
           </Teleport>
