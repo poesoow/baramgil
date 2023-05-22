@@ -8,17 +8,14 @@
       <p class="text-6xl tracking-[10%]">바람길</p>
       <p class="text-3xl -tracking-[5%]">질문게시판</p>
     </div>
-    <FAQ />
   </div>
   <router-view></router-view>
 </template>
 <script>
-import FAQ from "@/page/Cs/FaqView.vue"
 
 export default {
   name: 'QnaView',
   components: {
-    FAQ,
   },
   props:{
     title: Array,
