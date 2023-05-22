@@ -9,7 +9,7 @@
   <div class="w-full h-full z-10 lg:sticky top-0 bg-white/80 lg:mb-0 sm:mb-44 md:mb-38 mb-32 duration-300 transition-all">
 
     <!-- @click="btnMenu == true ? btnMenu = false : btnMenu = true" -->
-    <div class="max-w-7xl min-w-[640px] mx-auto">
+    <div class="max-w-5xl mx-auto">
       <div class="w-full  mr-[2%] flex justify-end ">
         <!-- 사이트 로고 -->
         <a href="" class="lg:hidden"><img src="https://via.placeholder.com/200x60" alt="사이트 로고"
@@ -42,10 +42,10 @@
 
       <!-- 네비게이션 Gnb -->
       <div class="w-full flex justify-between sm:mt-10 lg:mt-0 duration-300 transition-all">
-        <a href="" class="hidden md:block duration-700 transition-all border -mt-1">
+        <a href="" class="hidden md:block duration-700 transition-all -mt-1">
           <img src="http://via.placeholder.com/170x50" alt="로고" title="로고 이미지" class="hidden lg:block">
         </a>
-        <div class="max-w-3xl mx-auto ">
+        <div class="max-w-3xl mx-auto">
           <div class="text-center w-full">
             <!-- 검색상자 + 돋보기 icon 모바일 화면 -->
             <div class="lg:hidden flex justify-between relative sm:ml-[20%] w-[70%] md:mb-20 md:mt-3">
@@ -53,8 +53,8 @@
               <font-awesome-icon icon="search" class="absolute -right-10 sm:right-0 text-[14px] border border-black px-[4.5px] py-[4.5px] rounded-full"/>
             </div>
             <!-- 오버시 서브 메뉴 -->
-            <ul class="flex justify-center gap-x-7 ml-[6%] font-bold text-xl md:gap-x-16 w-full mt-10 lg:mt-0 md:mt-14 sm:mt-20 duration-500 transition-all">
-              <li class="sm:w-34 sm:px-10 md:px-0 transition-all duration-500 text-xl leading-9 "
+            <ul class="flex justify-center gap-x-7 font-bold text-xl md:gap-x-16 w-full mt-10 lg:mt-0 md:mt-14 sm:mt-20 duration-500 transition-all">
+              <li class="sm:px-10 md:px-0 transition-all duration-500 text-xl leading-9 "
                 v-for="(e, index) in Gnb" :key="e" :class="SubMenuIndex == index"
                 @mouseout="SubMenuIndex = null"
                 @mouseover="SubMenuIndex = index; Subfunction(index)">

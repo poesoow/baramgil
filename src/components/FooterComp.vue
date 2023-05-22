@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full mx-auto h-auto px-[2%] border-t pt-8 transition-all duration-700 md:relative">
+  <div class="w-full mx-auto h-auto px-[2%] border-t pt-8 transition-all duration-700 ">
     <div class="max-w-5xl mx-auto">
       <!-- 배너 이미지 -->
       <div class="lg:flex justify-center border-b px-2 pb-8">
@@ -12,8 +12,8 @@
       <!-- 배너 이미지 -->
       
       <!-- SNS 아이콘 -->
-      <div class="pb-3 mt-6 transition-all duration-500 md:absolute md:right-0 md:mr-[2%] lg:mr-[4%] md:mt-[3%] xl:mr-[13%] 2xl:mr-[19%]">
-        <ul class="flex justify-center lg:gap-x- ml-3 md:gap-x-1 sm:gap-x-6">
+      <div class="static pb-3 mt-6 transition-all duration-500 md:hidden md:right-0 md:mr-[2%] lg:mr-[4%] md:mt-[3%] xl:mr-[13%] 2xl:mr-[19%] ">
+        <ul class="flex justify-center ml-3 gap-x-7 sm:gap-x-6 md:gap-x-1 lg:gap-x-9 ">
           <li v-for="(e, index) in ImgDesc" :key="e" class="flex gap-x-5 ">
             <img :src="require(`../assets/images/footer/icon${index+1}.png`)" alt="SNS 아이콘"
             class="lg:w-8 lg:h-8 w-7 h-7 transition-all duration-300 rounded-xl mr-3">
@@ -23,14 +23,21 @@
       <!-- SNS 아이콘 -->
 
       <!-- 텍스트 -->
-      <div class="pb-8 sm:gap-x-5  lg:gap-x-10 mt-4 px-2 transition-all duration-500 tracking-tighter lg:tracking-widest  md:tracking-tight text-xs md:text-sm text-slate-700">
+      <div class="pb-8 sm:gap-x-5  lg:gap-x-10 mt-4 px-2 transition-all duration-500 tracking-tighter lg:tracking-widest  md:tracking-tight text-xs md:text-sm text-slate-700 md:relative">
         <ul class="flex flex-wrap justify-center mb-5 md:justify-start md:gap-x-6 gap-x-10">
           <li v-for="e in FooterTxt[0]" :key="e" class="shrink-0">{{ e }}</li>
         </ul>
         <ul class="flex flex-wrap justify-center md:mb-5 md:justify-start md:gap-x-6 gap-x-4">
-          <li v-for="e in FooterTxt[1]" :key="e" class="sm:mb-3 md:mb-0 shrink-0">{{ e }}</li>
+          <li v-for="e in FooterTxt[1]" :key="e" class="sm:mb-3 md:mb-0 shrink-0 last-of-type:mt-3">{{ e }}</li>
         </ul>
-        <p class="text-center text-sm md:text-left mt-3 md:mt-0">CopyRight © 2023 Team-Project. All Rights Reserved.</p>
+        <!-- SNS 아이콘 -->
+        <ul class="hidden md:flex justify-center md:gap-x-1 sm:gap-x-6 md:absolute md:top-[1%] md:right-[1%] md:justify-end">
+          <li v-for="(e, index) in ImgDesc" :key="e" class="">
+            <img :src="require(`../assets/images/footer/icon${index+1}.png`)" alt="SNS 아이콘"
+            class="lg:w-8 lg:h-8 w-7 h-7 transition-all duration-300 rounded-xl mr-3">
+          </li>
+        </ul>
+        <p class="text-center text-xs md:text-sm md:text-left mt-3">CopyRight © 2023 Team-Project. All Rights Reserved.</p>
       </div>
       <!-- 텍스트 -->
 
