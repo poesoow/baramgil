@@ -1,6 +1,6 @@
 <template lang="">
-  <div class="w-full px-[5%]">
-    <div class="xl:w-full h-[389px] flex items-center flex-col justify-center gap-y-[13px]">
+  <div class="w-full">
+    <div class="w-full h-[389px] flex items-center flex-col justify-center gap-y-[13px]">
       <p class="text-6xl tracking-[10%]">바람길</p>
       <p class="text-3xl -tracking-[5%]">공지사항</p>
     </div>

@@ -14,7 +14,7 @@
             <font-awesome-icon icon="q" class="w-5 h-5" />
             <p class="text-lg">{{ e }}</p>
           </div>
-          <font-awesome-icon icon="chevron-down" />
+          <font-awesome-icon :icon="(isClick === true) && (num === index) ? 'chevron-up' : 'chevron-down'" />
         </div>
         <template v-for="(el, i) in AnswerData" :key="el">
           <div v-if="(num === i) && (isClick === true) && (i === index)" class="w-full py-[26px] flex items-center gap-x-5 px-[2%] border-b border-[#d9d9d9]">
