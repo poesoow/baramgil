@@ -11,6 +11,7 @@ export default createStore({
     qnaId: 0,
     reviewId: 0,
     galleryId: 0,
+    data: null
   },
   getters: {
   },
@@ -24,6 +25,10 @@ export default createStore({
     ReviewRead(state, payload) {
       state.qnaId = payload
     },
+    detailInfo(state, payload) {
+      state.data = payload
+      console.log(payload)
+    }
   },
   actions: {
   },

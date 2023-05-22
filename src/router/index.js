@@ -4,6 +4,7 @@ import HomePage from '../page/HomePage.vue'
 import TourapiPage from '../page/TourapiPage.vue'
 import TourserviceView from '../page/Tourapi/TourserviceView'
 import TourcourseView from '../page/Tourapi/TourcourseView'
+import TourdetailView from '../page/Tourapi/TourdetailView'
 
 import CsPage from '../page/CsPage.vue'
 
@@ -42,7 +43,12 @@ const routes = [
       {
         path: "/tour/info",
         name: "TourserviceView",
-        component: TourserviceView
+        component: TourserviceView,
+      },
+      {
+        path: "/tour/detail",
+        name: "TourdetailView",
+        component: TourdetailView
       },
       {
         path: "/tour/course",
