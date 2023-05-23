@@ -19,6 +19,10 @@ import QnaRead from '@/page/Cs/QnaRead.vue'
 import QnaModify from '@/page/Cs/QnaModify.vue'
 import QnaWrite from '@/page/Cs/QnaWrite.vue'
 
+import LoginPage from '@/page/LoginPage.vue'
+import MemberPage from '@/page/MemberPage.vue'
+import SignupPage from '@/page/SignupPage.vue'
+
 import NotPage from '@/page/NotPage.vue'
 
 const routes = [
@@ -108,6 +112,21 @@ const routes = [
         ]
       },
     ]
+  },
+  {
+    path: '/login',
+    name: 'LoginPage',
+    component: LoginPage
+  },
+  {
+    path: '/member',
+    name: 'MemberPage',
+    component: MemberPage
+  },
+  {
+    path: '/signup',
+    name: 'SignupPage',
+    component: SignupPage
   },
   {
     path: '/404',

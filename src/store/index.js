@@ -20,6 +20,25 @@ export default createStore({
     QnaRead(state, payload) {
       state.qnaId = payload
     },
+    loginToken(state, payload){
+      state.loginChk = payload.refreshToken
+      state.loginChk = true
+      state.uid = payload.uid
+      console.log(payload.uid)
+    },
+    logOutToken(state){
+      state.loginChk = false
+      state.loginToken = null
+      state.uid =''
+      sessionStorage.removeItem("refreshToken")
+      sessionStorage.removeItem("displayName")
+    },
+    loginState(state,payload){
+      state.loginToken = sessionStorage.getItem("refreshToken");
+      state.displayName = payload.displayName
+      state.uid = payload.uid
+      state.loginChk =true
+    }
   },
   actions: {
   },
