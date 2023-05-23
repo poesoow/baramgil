@@ -45,7 +45,6 @@ export default createStore({
     },
     detailInfo(state, payload) {
       state.data = payload
-      console.log(payload)
     }
   },
   actions: {

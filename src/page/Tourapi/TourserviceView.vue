@@ -28,7 +28,10 @@
     <p class="mt-3 mb-14">
       <ul class="flex gap-[30px] flex-wrap justify-center">
         <li v-for="data in dataList" :key="data" class="md:basis-1/4">
-          <router-link to="/tour/detail" @click="$store.commit('detailInfo', data)">
+          <!-- :to="{name: 'NoticeRead', query: {docId: dataId[index]}}" -->
+          <router-link 
+            :to="{name: 'TourdetailView', query: {contentid: data.contentid, contentTypeid: data.contenttypeid}}"
+            @click="$store.commit('detailInfo', data)">
               <img :src="data.firstimage" :alt="data.title" class="block w-full rounded-xl h-96">
               <div>{{ data.title }}</div>
               <div>{{ simpleAddress(data.addr1) }}</div>
@@ -88,9 +91,9 @@ export default {
       contentTypeId: '15', // 관광타입(12:관광지, 14:문화시설, 15:축제공연행사, 25:여행코스, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
       cateType: '', // 서비스 분류 코드
       // 페이지네이션
-      perPage: 10,
+      perPage: 5,
       lastVisible: null,
-      block: 10,
+      block: 5,
       currentPage: 1,
     }
   },
