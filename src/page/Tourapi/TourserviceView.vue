@@ -91,9 +91,9 @@ export default {
       contentTypeId: '15', // 관광타입(12:관광지, 14:문화시설, 15:축제공연행사, 25:여행코스, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
       cateType: '', // 서비스 분류 코드
       // 페이지네이션
-      perPage: 10,
+      perPage: 5,
       lastVisible: null,
-      block: 10,
+      block: 5,
       currentPage: 1,
     }
   },
