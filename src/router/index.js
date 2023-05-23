@@ -20,11 +20,16 @@ import QnaRead from '@/page/Cs/QnaRead.vue'
 import QnaModify from '@/page/Cs/QnaModify.vue'
 import QnaWrite from '@/page/Cs/QnaWrite.vue'
 
+
 import ReviewView from '@/page/Review/ReviewView.vue'
 import ReviewList from '@/page/Review/ReviewList.vue'
 import ReviewRead from '@/page/Review/ReviewRead.vue'
 import ReviewModify from '@/page/Review/ReviewModify.vue'
 import ReviewWrite from '@/page/Review/ReviewWrite.vue'
+
+import LoginPage from '@/page/LoginPage.vue'
+import MemberPage from '@/page/MemberPage.vue'
+import SignupPage from '@/page/SignupPage.vue'
 
 import NotPage from '@/page/NotPage.vue'
 
@@ -148,6 +153,21 @@ const routes = [
         component: ReviewModify
       }
     ]
+  },
+  {
+    path: '/login',
+    name: 'LoginPage',
+    component: LoginPage
+  },
+  {
+    path: '/member',
+    name: 'MemberPage',
+    component: MemberPage
+  },
+  {
+    path: '/signup',
+    name: 'SignupPage',
+    component: SignupPage
   },
   {
     path: '/404',
