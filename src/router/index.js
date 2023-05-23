@@ -20,11 +20,11 @@ import QnaRead from '@/page/Cs/QnaRead.vue'
 import QnaModify from '@/page/Cs/QnaModify.vue'
 import QnaWrite from '@/page/Cs/QnaWrite.vue'
 
-import ReviewView from '@/page/Cs/ReviewView.vue'
-import ReviewList from '@/page/Cs/ReviewList.vue'
-import ReviewRead from '@/page/Cs/ReviewRead.vue'
-import ReviewModify from '@/page/Cs/ReviewModify.vue'
-import ReviewWrite from '@/page/Cs/ReviewWrite.vue'
+import ReviewView from '@/page/Review/ReviewView.vue'
+import ReviewList from '@/page/Review/ReviewList.vue'
+import ReviewRead from '@/page/Review/ReviewRead.vue'
+import ReviewModify from '@/page/Review/ReviewModify.vue'
+import ReviewWrite from '@/page/Review/ReviewWrite.vue'
 
 import NotPage from '@/page/NotPage.vue'
 
@@ -119,34 +119,34 @@ const routes = [
           }
         ]
       },
+    ]
+  },
+  {
+    path: '/review',
+    name: 'ReviewView',
+    component: ReviewView,
+    redirect: '/review/list',
+    children: [
       {
-        path: '/cs/review',
-        name: 'ReviewView',
-        component: ReviewView,
-        redirect: '/cs/review/list',
-        children: [
-          {
-            path: "/cs/review/list",
-            name: "ReviewList",
-            component: ReviewList
-          },
-          {
-            path: "/cs/review/write",
-            name: "ReviewWrite",
-            component: ReviewWrite
-          },
-          {
-            path: "/cs/review/read",
-            name: "ReviewRead",
-            component: ReviewRead
-          },
-          {
-            path: "/cs/review/modify",
-            name: "ReviewModify",
-            component: ReviewModify
-          }
-        ]
+        path: "/review/list",
+        name: "ReviewList",
+        component: ReviewList
       },
+      {
+        path: "/review/write",
+        name: "ReviewWrite",
+        component: ReviewWrite
+      },
+      {
+        path: "/review/read",
+        name: "ReviewRead",
+        component: ReviewRead
+      },
+      {
+        path: "/review/modify",
+        name: "ReviewModify",
+        component: ReviewModify
+      }
     ]
   },
   {

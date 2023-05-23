@@ -1,63 +1,65 @@
 <template lang="">
-  <div class="w-full px-[5%]">
-    <div class="xl:w-full h-11 mx-1.5 box-border flex justify-end gap-x-[15px]">
-      <input type="text" placeholder="검색어를 입력하세요" class="w-[271px] h-full py-[9px] pl-2 border border-[#555555] box-border rounded-[10px]">
-      <button class="w-[72px] h-full border rounded-[10px] text-center bg-[#d9d9d9] shadow">버튼</button>
-    </div>
-  </div>
   <div class="basis-full px-[5%]">
-    <div class="max-w-7xl mx-auto my-10">
-      <ul class="flex justify-between border-t-indigo-500 border-t-2 p-4 py-2 bg-indigo-50">
-        <li class="basis-1/12 text-center">상단고정</li>
-        <li class="basis-1/12 text-center">번호</li>
-        <li class="basis-3/12 text-center">제목</li>
-        <li class="basis-2/12 text-center">글쓴이</li>
-        <li class="basis-2/12 text-center">날짜</li>
-        <li class="basis-1/12 text-center">조회수</li>
-        <li class="basis-1/12 text-center">추천</li>
-        <li class="basis-1/12 text-center">비추천</li>
-      </ul>
-      <template v-for="(e,index) in NoticeArray" :key="e">
-        <ul v-if="e.fixed" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
-          <li class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
-          <li class="basis-1/12 text-center">공지</li>
-          <li class="basis-3/12 text-center line-clamp-1"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
-          <li class="basis-2/12 text-center">{{ e.name }}</li>
-          <li class="basis-2/12 text-center">{{ BoardDate(index) }}</li>
-          <li class="basis-1/12 text-center">{{ e.hit }}</li>
-          <li class="basis-1/12 text-center">{{ e.good }}</li>
-          <li class="basis-1/12 text-center">{{ e.bad }}</li>
-        </ul>
-      </template>
-      <template v-for="(e, index) in dataList" :key="index">
-          <ul v-if="calculateNumber(totalLength, perPage, page, index) > 0 && e.fixed == false" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
-          <li v-if="e.fixed === true" class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
-          <li v-else class="basis-1/12 text-center"></li>
-          
-          <li class="basis-1/12 text-center" v-if="e.fixed != true">{{totalLength - index}}</li>
-          <li class="basis-3/12 text-center line-clamp-1"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
-          <li class="basis-2/12 text-center">{{ e.name }}</li>
-          <li class="basis-2/12 text-center">{{ BoardDate(index) }}</li>
-          <li class="basis-1/12 text-center">{{ e.hit }}</li>
-          <li class="basis-1/12 text-center">{{ e.good }}</li>
-          <li class="basis-1/12 text-center">{{ e.bad }}</li>
-        </ul>  
-      </template>
-    </div>
-    <div class="flex justify-end pb-24">
-      <router-link to="/cs/notice/write" class="bg-indigo-400 hover:bg-indigo-600 focus:ring-indigo-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">글쓰기</router-link>
+    <div class="max-w-7xl mx-auto">
+      <div class="w-full h-11 mx-1.5 box-border flex justify-end gap-x-[15px]">
+        <input type="text" placeholder="검색어를 입력하세요" class="basis-[271px] h-full py-[9px] pl-2 border border-[#555555] box-border rounded-[10px]">
+        <button class="basis-[72px] h-full border rounded-[10px] text-center bg-[#d9d9d9] shadow">버튼</button>
+      </div>
+      <div class="w-full">
+        <div class="max-w-7xl mx-auto my-10">
+          <ul class="flex justify-between border-t-indigo-500 border-t-2 p-4 py-2 bg-indigo-50">
+            <li class="basis-1/12 text-center">상단고정</li>
+            <li class="basis-1/12 text-center">번호</li>
+            <li class="basis-3/12 text-center">제목</li>
+            <li class="basis-2/12 text-center">글쓴이</li>
+            <li class="basis-2/12 text-center">날짜</li>
+            <li class="basis-1/12 text-center">조회수</li>
+            <li class="basis-1/12 text-center">추천</li>
+            <li class="basis-1/12 text-center">비추천</li>
+          </ul>
+          <template v-for="(e,index) in NoticeArray" :key="e">
+            <ul v-if="e.fixed" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
+              <li class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
+              <li class="basis-1/12 text-center">공지</li>
+              <li class="basis-3/12 text-center line-clamp-1"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
+              <li class="basis-2/12 text-center">{{ e.name }}</li>
+              <li class="basis-2/12 text-center">{{ BoardDate(index) }}</li>
+              <li class="basis-1/12 text-center">{{ e.hit }}</li>
+              <li class="basis-1/12 text-center">{{ e.good }}</li>
+              <li class="basis-1/12 text-center">{{ e.bad }}</li>
+            </ul>
+          </template>
+          <template v-for="(e, index) in dataList" :key="index">
+              <ul v-if="calculateNumber(totalLength, perPage, page, index) > 0 && e.fixed == false" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
+              <li v-if="e.fixed === true" class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
+              <li v-else class="basis-1/12 text-center"></li>
+              
+              <li class="basis-1/12 text-center" v-if="e.fixed != true">{{totalLength - index}}</li>
+              <li class="basis-3/12 text-center line-clamp-1"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
+              <li class="basis-2/12 text-center">{{ e.name }}</li>
+              <li class="basis-2/12 text-center">{{ BoardDate(index) }}</li>
+              <li class="basis-1/12 text-center">{{ e.hit }}</li>
+              <li class="basis-1/12 text-center">{{ e.good }}</li>
+              <li class="basis-1/12 text-center">{{ e.bad }}</li>
+            </ul>  
+          </template>
+        </div>
+        <div class="flex justify-end pb-24">
+          <router-link to="/cs/notice/write" class="bg-indigo-400 hover:bg-indigo-600 focus:ring-indigo-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">글쓰기</router-link>
+        </div>
+      </div>
+      <div class="flex justify-center w-full gap-x-5">
+        <button @click="pervPage" :disabled = "currentPage <= 1">이전</button>
+        <button v-for="e in pageCount.pagination" :key="e" @click="goToPage(e)" :class="page == e && 'font-bold, text-orange-500'">
+        {{ e }}</button>
+        <button @click="nextPage" :disabled = "currentPage >= pageCount.totalPage / block">다음</button>
+      </div>
+      <!-- {{ pageCount.pagination }}
+      {{ page }}
+      {{ currentPage }}
+      {{ pageCount.pagination[0] }} -->
     </div>
   </div>
-  <div class="flex justify-center basis-full gap-x-5">
-    <button @click="pervPage" :disabled = "currentPage <= 1">이전</button>
-    <button v-for="e in pageCount.pagination" :key="e" @click="goToPage(e)" :class="page == e && 'font-bold, text-orange-500'">
-    {{ e }}</button>
-    <button @click="nextPage" :disabled = "currentPage >= pageCount.totalPage / block">다음</button>
-  </div>
-  {{ pageCount.pagination }}
-  {{ page }}
-  {{ currentPage }}
-  {{ pageCount.pagination[0] }}
 </template>
 <script>
 
