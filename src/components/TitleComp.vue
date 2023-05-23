@@ -5,6 +5,9 @@
         <slot></slot>
       </p>
       <!-- <p class="text-3xl -tracking-[5%]">공지사항</p> -->
+      <p class="text-3xl -tracking-[5%]">
+        <slot name="subTitle"></slot>
+      </p>
     </div>
   </div>
 </template>
