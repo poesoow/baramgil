@@ -50,11 +50,9 @@ export default {
   methods: {
     // 스와이퍼의 현재 페이지 위치와 전체 개수 값 계산
     onSlide(swiper) {
-      console.log(swiper.slides.length)
       this.SlideLength = swiper.slides.length
     },
     onSlideChange(swiper) {
-      console.log(swiper)
       this.RealIndex = swiper.realIndex + 1
     }
   },
