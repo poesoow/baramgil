@@ -4,7 +4,7 @@
       <!-- 배너 이미지 -->
       <div class="lg:flex justify-center border-b px-2 pb-8">
         <ul class="flex justify-center gap-x-3 sm:gap-x-4 md:gap-x-[2%] lg:gap-x-[68px] xl:gap-x-[78px] transition-all duration-500 pt-2 ">
-          <li v-for="(e, index) in 5" :key="e" class=" transition-all duration-500">
+          <li v-for="(e, index) in 5" :key="e" class=" transition-all duration-500 cursor-pointer">
             <img :src="require(`../assets/images/footer/ft_banner${index+1}.png`)" alt="푸터 배너" class="lg:w-[180px] md:w-[150px] sm:w-[140px] w-[100px]  transition-all duration-500">
           </li>
         </ul>
@@ -14,7 +14,7 @@
       <!-- SNS 아이콘 -->
       <div class="static pb-3 mt-6 transition-all duration-500 md:hidden md:right-0 md:mr-[2%] lg:mr-[4%] md:mt-[3%] xl:mr-[13%] 2xl:mr-[19%] ">
         <ul class="flex justify-center ml-3 gap-x-7 sm:gap-x-6 md:gap-x-1 lg:gap-x-9 ">
-          <li v-for="(e, index) in ImgDesc" :key="e" class="flex gap-x-5 ">
+          <li v-for="(e, index) in ImgDesc" :key="e" class="flex gap-x-5 cursor-pointer">
             <img :src="require(`../assets/images/footer/icon${index+1}.png`)" alt="SNS 아이콘"
             class="lg:w-8 lg:h-8 w-7 h-7 transition-all duration-300 rounded-xl mr-3">
           </li>
