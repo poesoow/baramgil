@@ -19,13 +19,13 @@
             <div class="flex basis-4/12 justify-end items-center">
               <div class="flex justify-end gap-x-8 md:gap-x-16 text-xs md:text-sm font-extralight">
                 <p>조회수 : {{ BoardContent.hit }}</p>
-                <!-- <p @click.once="GoodChk"><font-awesome-icon icon="fa-thumbs-up" class="cursor-pointer" /> {{ BoardContent.good }}</p> -->
-                <!-- <p @click.once="noGoodChk"><font-awesome-icon icon="fa-thumbs-down" class="cursor-pointer" /> {{ BoardContent.bad }}</p> -->
                 <p>{{ dateTime }}</p>
               </div>
             </div>
           </div>
         </div>
+          <!-- <div class="mr-2 my-1 flex flex-wrap justify-between gap-x-0 border box-border basis-[45%]">
+          </div> -->
         <div class="basis-full px-3 text-sm md:text-base font-light mb-7">
           <div class="w-full mx-4 my-2.5">
             {{ BoardContent.content }}
@@ -34,14 +34,28 @@
             </div>
           </div>
         </div>
+        <div class="mt-6 flex basis-full mx-auto gap-y-2 flex-wrap justify-center my-6">
+          <p class="basis-full text-center text-base">{{ BoardContent.good }}</p>
+          <font-awesome-icon @click.once="GoodChk" icon="fa-thumbs-up" class="basis-full cursor-pointer" />
+          <p @click.once="GoodChk" class="basis-full text-sm text-center cursor-pointer">추천하기</p>
+        </div>
       </div>
-      <div class="flex w-full justify-end pb-24 gap-x-5 mt-5">
+      <!-- <div class="basis-9/12 mx-auto flex justify-end gap-x-5 text-sm font-extralight mb-3">
+        <p>조회수 : {{ BoardContent.hit }}</p>
+        <p @click.once="GoodChk"><font-awesome-icon icon="fa-thumbs-up" class="cursor-pointer" /> {{ BoardContent.good }}</p>
+        <p>{{ dateTime }}</p>
+      </div> -->
+    </div>
+  </div>
+  <div class="basis-full">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex w-full justify-between pb-24 mt-3.5 px-4">
         <div class="mt-[5px]">
-          <router-link to="/cs/notice/list" class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</router-link>
+          <router-link to="/review/list" class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-4 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</router-link>
         </div>
         <div class="flex gap-x-5">
-          <router-link to="/cs/notice/modify" class="bg-green-400 hover:bg-green-600 focus:ring-green-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">수정</router-link>
-          <button class="bg-red-400 hover:bg-red-600 focus:ring-red-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Delete">삭제</button>
+          <router-link to="/review/modify" class="bg-green-400 hover:bg-green-600 focus:ring-green-400 py-2 px-4 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">수정</router-link>
+          <button class="bg-red-400 hover:bg-red-600 focus:ring-red-400 py-2 px-4 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Delete">삭제</button>
         </div>
       </div>
     </div>
@@ -51,7 +65,7 @@
 import { db } from "../../firebase"
 
 export default {
-  name: "NoticeRead",
+  name: "ReviewRead",
   data() {
     return {
       BoardContent: [],
@@ -63,57 +77,41 @@ export default {
       let msg = confirm("삭제된 데이터는 복구할 수 없습니다. /r/r 삭제하시겠습니까?");
       if(msg){
         console.log("!!")
-        db.collection("notice").doc(this.$route.query.docId).delete().then(() => {
+        db.collection("review").doc(this.$route.query.docId).delete().then(() => {
           alert("삭제가 완료 되었습니다.")
-          this.$router.replace("/cs/notice")
+          this.$router.replace("/review")
         })
       }
     },
     GoodChk() {
       if(this.BoardContent.goodChk){
-        alert("이미 추천 혹은 비추천 하셨습니다.");
-        return;
+        alert("이미 추천 하셨습니다.");
+        return; 
       }
-      db.collection("notice").doc(this.$route.query.docId).update({
+      db.collection("review").doc(this.$route.query.docId).update({
         good: this.BoardContent.good + 1,
         goodChk : true
       }).then(() => {
-        db.collection("notice").doc(this.$route.query.docId).get().then((data) => {
+        db.collection("review").doc(this.$route.query.docId).get().then((data) => {
           this.BoardContent = data.data()
         })
       })
-
-    },
-    noGoodChk() {
-      if(this.BoardContent.bad){
-        alert("이미 추천 혹은 비추천 하셨습니다.");
-        return;
-      }
-      db.collection("notice").doc(this.$route.query.docId).update({
-        bad: this.BoardContent.bad + 1,
-        badChk : true
-      }).then(() => {
-        db.collection("notice").doc(this.$route.query.docId).get().then((data) => {
-          this.BoardContent = data.data()
-        })
-      })
-
     },
   },
   mounted() {
-    if(this.$store.state.noticeId == null){
-      this.$router.replace("/cs/notice")
+    if(this.$store.state.reviewId == null){
+      this.$router.replace("/review")
     }
-    db.collection("notice").doc(this.$route.query.docId).get().then((data) => {
+    db.collection("review").doc(this.$route.query.docId).get().then((data) => {
       this.BoardContent = data.data()
       if(data.data().isUpdate){
         return;
       }
-      db.collection("notice").doc(this.$route.query.docId).update({
+      db.collection("review").doc(this.$route.query.docId).update({
         hit: data.data().hit + 1,
       })
     }).then(() => {
-      db.collection("notice").doc(this.$route.query.docId).get().then((update) => {
+      db.collection("review").doc(this.$route.query.docId).get().then((update) => {
         this.BoardContent = update.data();
         const date = this.BoardContent.date.seconds * 1000 + this.BoardContent.date.nanoseconds / 1000000
       const new_date = new Date(date);
