@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
   <Title>여행코스</Title>
-
+  
   <div class="w-full">
     <p class="my-12 text-1xl mx-auto">
       <ul class="flex gap-5 max-w-5xl mx-auto justify-center">
@@ -17,24 +17,24 @@
 
 
     <div class="mt-3 mb-6">
-      <div v-for="(tour, index) in tourCourse" :key="index" class="basis-full border rounded-md mb-20 flex flex-wrap justify-center items-center group">
+
+      <div v-for="(data, index) in dataList" :key="data" class="basis-full border rounded-md mb-20 relative flex flex-wrap items-center group">
         <div class="basis-full md:basis-2/4 group-odd:order-1 md:group-odd:order-1 md:group-even:order-2">
-          <img :src="require(`@/assets/images/travelCourse/${tour.image}`)" :alt="tour.name" class="w-full p-2.5 h-[350px]">
+          <img @click="openModal(index)" :src="`http://placeholder.com/350`" :alt="data.title" class="w-full p-2.5 h-[350px]">
         </div>
-        <div class="basis-full justify-center md:basis-2/4 md:group-even:left-14 md:group-odd:-left-14 group-odd:order-2 group-even:text-right group-even:order-1 z-10 px-7 sm:px-16 py-5 box-border">
+        <div class="basis-full md:basis-2/4 md:group-even:left-14 md:group-odd:-left-14 group-odd:order-2 group-even:text-right group-even:order-1 relative z-10 px-7 sm:px-16 py-5 box-border">
           <div>
-            <h3 class="mt-3 mb-7 text-2xl">{{ tour.name }}</h3>
-            <p class="mb-3 leading-7">코스 : {{ tour.course }}</p>
-            <!-- <h3 class="my-3">{{ data.crsKorNm }}</h3>
+
+            <h3 class="my-3">{{ data.crsKorNm }}</h3>
             <p class="mb-3">{{ data.crsCycle }}</p>
             <p class="mb-3" v-html="data.crsContents"></p>
             <p class="mb-3" v-html="data.crsTourInfo"></p>
-            <p class="mb-3" v-html="data.travelerinfo"></p> -->
+            <p class="mb-3" v-html="data.travelerinfo"></p>
             <!-- <p class="mb-3"> 경로 파일 {{ data.gpxpath }}</p> -->
           </div>
-          <!-- <p class="mb-3" v-html="data.crsContents"></p> -->
-          <!-- <button @click="openModal(index)">자세히 보기</button> -->
-          <!-- <Teleport to="body">
+          <p class="mb-3" v-html="data.crsContents"></p>
+          <button @click="openModal(index)">자세히 보기</button>
+          <Teleport to="body">
             <div v-if="isModal && (Number(index) == selectIndex)" class="fixed z-[100] top-[30%] left-[10%] w-4/5 bg-white">
               <p class="text-2xl">{{ data.crsKorNm }}</p>
               <hr>
@@ -45,7 +45,7 @@
               <p class="mb-3">{{ data.travelerinfo }}</p>
               <button @click="closeModal">닫기</button>
             </div>
-          </Teleport> -->
+          </Teleport>
         </div>
       </div>
 
@@ -64,7 +64,6 @@
   import tourData from '@/assets/tourData.json'
   import axios from 'axios'
   import Title from '@/components/TitleComp.vue'
-  import TourCourse from '@/assets/TourCourse.json'
 
   export default {
     name: 'TourerviceView',
@@ -90,25 +89,24 @@
         listYN: 'Y', // 목록구분(Y=목록, N=개수)
         contentTypeId: '15', // 관광타입(12:관광지, 14:문화시설, 15:축제공연행사, 25:여행코스, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
         cateType: '', // 서비스 분류 코드
-        tourCourse: TourCourse.area, // 관광 코스
       }
     },
     mounted() {
       this.fetchData()
     },
     methods: {
-      // openModal(index) {
-      //   this.isModal = true
-      //   this.selectIndex = Number(index)
-      //   const body = document.querySelector('body')
-      //   body.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';  
-      // },
-      // closeModal() {
-      //   this.isModal = false
-      //   this.selectIndex = -1
-      //   const body = document.querySelector('body')
-      //   body.style.backgroundColor = '';
-      // },
+      openModal(index) {
+        this.isModal = true
+        this.selectIndex = Number(index)
+        const body = document.querySelector('body')
+        body.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';  
+      },
+      closeModal() {
+        this.isModal = false
+        this.selectIndex = -1
+        const body = document.querySelector('body')
+        body.style.backgroundColor = '';
+      },
       fetchMore() {
         alert('작업필요')
       },
@@ -133,7 +131,6 @@
             // console.log(res.data.response.body)
             this.dataList = res.data.response.body.items.item
             this.bodyInfo = res.data.response.body
-            console.log(this.dataList)
           }
         ).catch((err) => {
           console.log(err)
