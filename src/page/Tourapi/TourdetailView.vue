@@ -22,8 +22,8 @@
       <h3 class="text-[1.3em]">{{ content.infoname }}</h3>
       <div v-html="content.infotext"></div>
     </div>
-    <div>
-      <div id="map" class="w-96 h-96"></div>
+    <div class="my-12 flex gap-6">
+      <div id="map" class="lg:w-full w-[1000px] h-[500px]"></div>
     </div>
   </div>
 </template>
@@ -49,61 +49,62 @@
       }
     },
     mounted() {
-      const baseURL = 'https://apis.data.go.kr/B551011/KorService1/'
-      const serviceKey = 'vZqohu%2F1a1mKILW%2BslUEpMtWGBv0IvvlkE7zB28hKgPXkvzNMi9%2F2sawykKToWPc%2F%2FNeUM9rnQykkPu%2FLdPlpQ%3D%3D'
-
-      const commonUrlDetail = baseURL + 'detailCommon1' + '?serviceKey=' + serviceKey + '&MobileOS=ETC' + '&MobileApp=AppTest&_type=json'
-      const commonUrlInfo = baseURL + 'detailInfo1' + '?serviceKey=' + serviceKey + '&MobileOS=ETC' + '&MobileApp=AppTest&_type=json'
-
-      // 세부 api별 옵션 parameter
-      const contentTypeInfo = '&contentTypeId=' + this.contentTypeid
-      const contentIdInfo = '&contentId=' + this.contentid
-      let DetailendpointGet;
-      let InfoendpoidGet;
-
-      DetailendpointGet = axios.get(commonUrlDetail + contentTypeInfo + contentIdInfo + `&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y`)
-      InfoendpoidGet = axios.get(commonUrlInfo + contentTypeInfo + contentIdInfo)
-      
-      DetailendpointGet.then((res) => {
-          this.dataList = res.data.response.body.items.item
-          this.mapX = res.data.response.body.items.item[0].mapx
-          this.mapY = res.data.response.body.items.item[0].mapy
-          console.log(this.mapX, this.mapY)
-        }).catch((err) => {
-        console.log(err)
-      })
-
-      InfoendpoidGet.then((res) => {
-          this.detailList = res.data.response.body.items.item
-        }).catch((err) => {
-        console.log(err)
-      })
-
-      // 카카오맵 api
-      if (window.kakao && window.kakao.maps) {
-        this.initMap();
-      } else {
-        const script = document.createElement("script");
-        /* global kakao */
-        script.onload = () => kakao.maps.load(this.initMap);
-        script.src =
-          `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${this.kakaomykey}`;
-        document.head.appendChild(script);
-      }
+      this.fetchData()
     },
     methods: {
       initMap() {
         const container = document.getElementById("map");
-        console.log(this.mapY, this.mapX)
         const options = { //지도를 생성할 때 필요한 기본 옵션
           center: new kakao.maps.LatLng(this.mapY, this.mapX),
           level: 6, //지도의 레벨(확대, 축소 정도)
         };
-
+        console.log('카카오에서 좌표를 받았어요', '좌표 :', this.mapX, this.mapY)
         //지도 객체를 등록합니다.
         //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
         this.map = new kakao.maps.Map(container, options);
       },
+      fetchData() {
+        const baseURL = 'https://apis.data.go.kr/B551011/KorService1/'
+        const serviceKey = 'vZqohu%2F1a1mKILW%2BslUEpMtWGBv0IvvlkE7zB28hKgPXkvzNMi9%2F2sawykKToWPc%2F%2FNeUM9rnQykkPu%2FLdPlpQ%3D%3D'
+
+        const commonUrlDetail = baseURL + 'detailCommon1' + '?serviceKey=' + serviceKey + '&MobileOS=ETC' + '&MobileApp=AppTest&_type=json'
+        const commonUrlInfo = baseURL + 'detailInfo1' + '?serviceKey=' + serviceKey + '&MobileOS=ETC' + '&MobileApp=AppTest&_type=json'
+
+        // 세부 api별 옵션 parameter
+        const contentTypeInfo = '&contentTypeId=' + this.contentTypeid
+        const contentIdInfo = '&contentId=' + this.contentid
+        let DetailendpointGet;
+        let InfoendpoidGet;
+
+        DetailendpointGet = axios.get(commonUrlDetail + contentTypeInfo + contentIdInfo + `&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y`)
+        InfoendpoidGet = axios.get(commonUrlInfo + contentTypeInfo + contentIdInfo)
+
+        DetailendpointGet.then((res) => {
+          this.dataList = res.data.response.body.items.item
+          this.mapX = res.data.response.body.items.item[0].mapx
+          this.mapY = res.data.response.body.items.item[0].mapy
+          console.log('좌표가 왔어요~~', this.mapX, this.mapY)
+
+          // 카카오맵 api
+          if (window.kakao && window.kakao.maps) {
+              this.initMap();
+          } else {
+            const script = document.createElement("script");
+            /* global kakao */
+            script.onload = () => kakao.maps.load(this.initMap);
+            script.src =
+              `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${this.kakaomykey}`;
+            document.head.appendChild(script);
+          }
+        }).catch((err) => {
+          console.log(err)
+        })
+        InfoendpoidGet.then((res) => {
+          this.detailList = res.data.response.body.items.item
+        }).catch((err) => {
+          console.log(err)
+        })
+      }
     },
   }
 </script>
