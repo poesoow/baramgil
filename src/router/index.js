@@ -4,6 +4,7 @@ import HomePage from '../page/HomePage.vue'
 import TourapiPage from '../page/TourapiPage.vue'
 import TourserviceView from '../page/Tourapi/TourserviceView'
 import TourcourseView from '../page/Tourapi/TourcourseView'
+import TourdetailView from '../page/Tourapi/TourdetailView'
 
 import CsPage from '../page/CsPage.vue'
 
@@ -19,9 +20,17 @@ import QnaRead from '@/page/Cs/QnaRead.vue'
 import QnaModify from '@/page/Cs/QnaModify.vue'
 import QnaWrite from '@/page/Cs/QnaWrite.vue'
 
+<<<<<<< HEAD
 import LoginPage from '@/page/LoginPage.vue'
 import MemberPage from '@/page/MemberPage.vue'
 import SignupPage from '@/page/SignupPage.vue'
+=======
+import ReviewView from '@/page/Cs/ReviewView.vue'
+import ReviewList from '@/page/Cs/ReviewList.vue'
+import ReviewRead from '@/page/Cs/ReviewRead.vue'
+import ReviewModify from '@/page/Cs/ReviewModify.vue'
+import ReviewWrite from '@/page/Cs/ReviewWrite.vue'
+>>>>>>> 7c25e6a3d1d35756ffc46c1bfc93b36897c7c4ad
 
 import NotPage from '@/page/NotPage.vue'
 
@@ -40,7 +49,12 @@ const routes = [
       {
         path: "/tour/info",
         name: "TourserviceView",
-        component: TourserviceView
+        component: TourserviceView,
+      },
+      {
+        path: "/tour/detail",
+        name: "TourdetailView",
+        component: TourdetailView
       },
       {
         path: "/tour/course",
@@ -108,6 +122,34 @@ const routes = [
             path: "/cs/qna/modify",
             name: "QnaModify",
             component: QnaModify
+          }
+        ]
+      },
+      {
+        path: '/cs/review',
+        name: 'ReviewView',
+        component: ReviewView,
+        redirect: '/cs/review/list',
+        children: [
+          {
+            path: "/cs/review/list",
+            name: "ReviewList",
+            component: ReviewList
+          },
+          {
+            path: "/cs/review/write",
+            name: "ReviewWrite",
+            component: ReviewWrite
+          },
+          {
+            path: "/cs/review/read",
+            name: "ReviewRead",
+            component: ReviewRead
+          },
+          {
+            path: "/cs/review/modify",
+            name: "ReviewModify",
+            component: ReviewModify
           }
         ]
       },
