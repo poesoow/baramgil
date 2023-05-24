@@ -36,8 +36,8 @@
         </div>
         <div class="mt-6 flex basis-full mx-auto gap-y-2 flex-wrap justify-center my-6">
           <p class="basis-full text-center text-base">{{ BoardContent.good }}</p>
-          <font-awesome-icon @click.once="GoodChk" icon="fa-thumbs-up" class="basis-full cursor-pointer" />
-          <p @click.once="GoodChk" class="basis-full text-sm text-center cursor-pointer">추천하기</p>
+          <font-awesome-icon @click="GoodChk(0)" icon="fa-thumbs-up" class="basis-full cursor-pointer" />
+          <p @click="GoodChk(0)" class="basis-full text-sm text-center cursor-pointer">추천하기</p>
         </div>
       </div>
       <!-- <div class="basis-9/12 mx-auto flex justify-end gap-x-5 text-sm font-extralight mb-3">
@@ -62,7 +62,7 @@
   </div>
 </template>
 <script>
-import { db } from "../../firebase"
+import { db, auth } from "../../firebase"
 
 export default {
   name: "ReviewRead",
@@ -73,6 +73,36 @@ export default {
     }
   },
   methods: {
+    GoodChk(e){
+      const user = auth.currentUser;
+      db.collection("users").doc(user.uid).get().then(doc => {
+        if(!doc.exists){
+          db.collection("users").doc(user.uid).set({
+            goodChk: {}
+          }).then(() => {
+            this.GoodChk();
+          })
+        }else{
+          const userData = doc.data();
+          if(userData.goodChk && userData.goodChk[this.$route.query.docId]){
+            alert("이미 추천 혹은 비추천 하셨습니다.");
+            return;
+          }
+          const updateField = e === 0 ? 'good' : 'bad';
+          const updateData = {};
+          updateData[updateField] = this.BoardContent[updateField] + 1;
+          db.collection("notice").doc(this.$route.query.docId).update(updateData).then(() => {
+            userData.goodChk = userData.goodChk || {};
+            userData.goodChk[this.$route.query.docId] =  true
+            db.collection("users").doc(user.uid).set(userData).then(() => {
+              db.collection("notice").doc(this.$route.query.docId).get().then((data) => {
+                this.BoardContent = data.data()
+              })
+            })
+          })
+        }
+      })
+    },
     Delete(){
       let msg = confirm("삭제된 데이터는 복구할 수 없습니다. /r/r 삭제하시겠습니까?");
       if(msg){
@@ -83,20 +113,20 @@ export default {
         })
       }
     },
-    GoodChk() {
-      if(this.BoardContent.goodChk){
-        alert("이미 추천 하셨습니다.");
-        return; 
-      }
-      db.collection("review").doc(this.$route.query.docId).update({
-        good: this.BoardContent.good + 1,
-        goodChk : true
-      }).then(() => {
-        db.collection("review").doc(this.$route.query.docId).get().then((data) => {
-          this.BoardContent = data.data()
-        })
-      })
-    },
+    // GoodChk() {
+    //   if(this.BoardContent.goodChk){
+    //     alert("이미 추천 하셨습니다.");
+    //     return; 
+    //   }
+    //   db.collection("review").doc(this.$route.query.docId).update({
+    //     good: this.BoardContent.good + 1,
+    //     goodChk : true
+    //   }).then(() => {
+    //     db.collection("review").doc(this.$route.query.docId).get().then((data) => {
+    //       this.BoardContent = data.data()
+    //     })
+    //   })
+    // },
   },
   mounted() {
     if(this.$store.state.reviewId == null){
