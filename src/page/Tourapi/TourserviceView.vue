@@ -1,5 +1,8 @@
 <template>
-  <Title>여행정보</Title>
+  <Title>
+    바람길
+    <template #subTitle>여행정보</template>
+  </Title>
   <div>
     <p class="my-12 text-2xl max-w-5xl mx-auto">
       <ul class="flex gap-4 mx-auto justify-center">

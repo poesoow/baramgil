@@ -1,5 +1,8 @@
 <template>
-  <Title>여행정보</Title>
+  <Title>
+    바람길
+    <template #subTitle>여행정보</template>
+  </Title>
   <div class="max-w-5xl mx-auto text-center">
     <div v-for="data in dataList" :key="data" >
       <div class="my-5 text-left">

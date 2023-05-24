@@ -1,6 +1,9 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
-  <Title class="my-14 lg:my-0">여행정보</Title>
+  <Title>
+    바람길
+    <template #subTitle>여행정보</template>
+  </Title>
 
   <div class="w-full">
 
