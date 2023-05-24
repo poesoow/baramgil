@@ -11,7 +11,7 @@
               <div class="mt-3 pb-10">
                 <div class="flex justify-between items-center border-b mb-5">
                   <label class="mr-2 w-20 text-left">이메일</label>
-                  <input v-model="email" type="email" placeholder="이메일을 입력해주세요" class="text-left p-2 w-full">
+                  <input v-model="email" type="email" placeholder="이메일을 입력해주세요" class="focus:outline-opacity-60 text-left p-2 w-full">
                 </div>
                 <div class="flex justify-between items-center border-b mb-5">
                   <label class="mr-2 w-20 text-left">비밀번호</label>

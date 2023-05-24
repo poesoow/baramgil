@@ -2,7 +2,7 @@
   <!-- 상단 배너 슬라이드 영역 -->
   <div class="w-full ">
     <!-- :pagination="{ clickable: true, type:'fraction' }" -->
-    <div class="border">
+    <div class="border ">
       <swiper :slides-per-view="1" @swiper="onSwiper" @slideChange="onSlideChange" :scrollbar="{ draggable: true }"
         :modules="Modules" :autoplay="true && { delay: 3000 }" :loop="true" :navigation="true"
         class="w-full text-center banner-slide">
