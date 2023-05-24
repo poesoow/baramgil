@@ -144,7 +144,6 @@ export default {
         this.dataList = items;
         this.lastVisible = data.docs[data.docs.length - 1]
         console.log(this.dataList)
-
       })
     },
     calculateNumber(totalLength, perPage, page, index){
@@ -163,6 +162,6 @@ export default {
   },
 }
 </script>
-<style lang="">
+<style >
   
 </style>
