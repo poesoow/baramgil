@@ -23,7 +23,7 @@ export default createStore({
       state.qnaId = payload
     },
     loginToken(state, payload){
-      state.loginChk = payload.refreshToken
+      state.loginToken = payload.refreshToken
       state.loginChk = true
       state.uid = payload.uid
       console.log(payload.uid)
@@ -31,6 +31,7 @@ export default createStore({
     logOutToken(state){
       state.loginChk = false
       state.loginToken = null
+      state.displayName = ''
       state.uid =''
       sessionStorage.removeItem("refreshToken")
       sessionStorage.removeItem("displayName")
@@ -39,7 +40,7 @@ export default createStore({
       state.loginToken = sessionStorage.getItem("refreshToken");
       state.displayName = payload.displayName
       state.uid = payload.uid
-      state.loginChk =true
+      state.loginChk = true
     },
     ReviewRead(state, payload) {
       state.qnaId = payload
