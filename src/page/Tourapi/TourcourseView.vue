@@ -4,7 +4,7 @@
 
   <div class="w-full">
 
-   <p class="my-12 text-lg lg:text-xl mx-auto">
+  <p class="my-12 text-lg lg:text-xl mx-auto">
       <ul class="flex flex-wrap gap-5 max-w-5xl mx-auto justify-center">
         <li v-for="(area) in areaList" :key="area" @click="selectArea(area.code, area.name); fetchData()"
           :class="selectAreaCode == area.code && 'bg-[#B799FF] p-1 text-white rounded-md'">

@@ -18,11 +18,12 @@
         <!-- 네비게이션 Lnb -->
         <div class="md:ml-[30%] lg:mr-[2%] absolute top-[65px] left-[3%] md:top-0 md:static duration-500 transition-all py-4 mt-4">
           <ul class="flex gap-x-10 pb-3 pr-2  ">
-            <li v-if="logIn == false" class="hover:underline hover:underline-offset-4 font-semibold relative">로그인
-            </li>
-            <li v-if="logIn == false" class="hover:underline hover:underline-offset-4 font-semibold">회원가입</li>
-            <li v-if="logIn == true" class="hover:underline hover:underline-offset-4 font-semibold">마이 페이지</li>
-            <li v-if="logIn == true" class="hover:underline hover:underline-offset-4 font-semibold">로그 아웃</li>
+            <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold relative"><router-link to="/login"><font-awesome-icon icon="lock" /> 로그인</router-link></li>
+            <li v-else @click="logOut()" class="hover:underline hover:underline-offset-4 font-semibold relative"><router-link to="/"><font-awesome-icon icon="arrow-right-from-bracket" /> 로그아웃</router-link></li>
+            <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold"><router-link to="/member" ><font-awesome-icon icon="user" /> 회원가입</router-link></li>
+            <li v-else class="hover:underline hover:underline-offset-4 font-semibold cursor-pointer"><font-awesome-icon icon="user-gear" /> 마이 페이지</li>
+            
+            <!-- <li v-if="logIn == true" class="hover:underline hover:underline-offset-4 font-semibold">로그 아웃</li> -->
           </ul>
         </div>
       </div>
@@ -72,7 +73,6 @@
       </div>
     </div>
   </div>
-
   <!-- 모바일 버튼 클릭 시 사이드 메뉴-->
   <!-- @mouseover="SubMenu = true ? SubMenu = true : SubMenu = false" -->
   <div class="h-full lg:hidden fixed w-60 -right-60 top-0 p-10 bg-purple-200 duration-500 transition-all z-40"  :class="btnMenu && '!right-0'">
@@ -99,10 +99,10 @@
   </div>
   <!-- <ul class="pt-2 text-center absolute tracking-wider">
     <li v-for="(e, index) in Gnb" :key="e" class="mb-5 cursor-pointer"
-     @click="SubMenuIndex = index; Subfunction(index)"
-     @mouseover="SubMenuIndex = index; Subfunction(index)"
-     @mouseout="SubMenuIndex = null ">{{ e }}
-     <template v-for="(e, i) in SubList" :key="e">
+      @click="SubMenuIndex = index; Subfunction(index)"
+      @mouseover="SubMenuIndex = index; Subfunction(index)"
+      @mouseout="SubMenuIndex = null ">{{ e }}
+      <template v-for="(e, i) in SubList" :key="e">
       <ul v-if="index === i" class="h-0 overflow-hidden mt-2 rounded-b-md text-center duration-500 transition-all sub_list" :style="((SubMenuIndex === index) && (index == 1 || index == 3)) && 'height:90px'">
         <li v-for="el in e" :key="el" class="mb-3 last-of-type:mb-0 py-1 hover:bg-orange-500 hover:text-white duration-500 transition-all rounded-md">{{ el }}</li>
         </ul>
@@ -113,6 +113,7 @@
 </template>
 <script>
 import Gnb from '@/assets/NavData.json'
+import { auth } from '@/firebase'
 export default {
   name: "NavComp",
   data() {
@@ -133,6 +134,10 @@ export default {
     }
   },
   methods:{
+    logOut(){
+      auth.signOut();
+      this.$store.commit('logOutToken')
+    },
     updateWindowWidth(){
       this.windowWidth = window.innerWidth;
     },
