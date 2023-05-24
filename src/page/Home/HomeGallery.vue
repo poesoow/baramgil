@@ -1,7 +1,7 @@
 <template>
  <!-- 후기 게시판 / 1회에 4장 슬라이딩 -->
  <div class="w-full bg-gray-100 ">
-    <div class="max-w-5xl mx-auto mt-4 px-10 pt-2 pb-8 rounded-lg">
+    <div class="max-w-5xl mx-auto mt-4 pt-2 pb-8 rounded-lg">
       <p class="text-3xl ml-[3%] mt-4">여행 후기</p>
       <swiper :slides-per-view="3" :space-between="20" slides-per-group="3" @swiper="onSlide" @slideChange="onSlideChange"
         :pagination="{ clickable: true, type: 'progressbar' }" :modules="Modules" :autoplay="true && { delay: 3000 }"
