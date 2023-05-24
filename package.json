@@ -18,12 +18,14 @@
     "core-js": "^3.8.3",
     "firebase": "8",
     "postcss": "^8.4.23",
+    "request": "^2.88.2",
     "swiper": "^9.3.1",
     "tailwindcss": "^3.3.2",
     "tailwindcss-animated": "^1.0.1",
     "vue": "^3.2.13",
     "vue-router": "^4.2.0",
-    "vuex": "^4.1.0"
+    "vuex": "^4.1.0",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

@@ -104,7 +104,7 @@
         this.areaCode = code
       },
       fetchData() {
-
+        
         // 모든 api에 공통으로 들어가는 부분 수정할 필요없음
         const commonUrl = this.baseURL + 'courseList' + '?serviceKey=' + this.serviceKey + '&MobileOS=' + this.Mobileos + '&MobileApp=AppTest&_type=json'
 
