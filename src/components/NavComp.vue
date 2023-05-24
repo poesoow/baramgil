@@ -139,7 +139,6 @@ export default {
     Subfunction(e){
       if(e != 0){
           const list = document.querySelectorAll(".sub_list")[e];
-          console.log(list)
           const length = list.querySelectorAll("li").length;
           // console.log(length)
           this.isSubMenu = `height:${length*40}px`
@@ -156,7 +155,6 @@ export default {
     Subfunction2(e){
       if(e != 0){
           const list = document.querySelectorAll(".m_sub_list")[e];
-          console.log(list)
           const length = list.querySelectorAll("li").length;
           // console.log(length)
           this.isSubMenu = `height:${length*40}px`
