@@ -10,7 +10,7 @@
   "MenuLink": [
     {"link": "/", "sublink": []},
     {"link": "/tour", "sublink": ["/tour/info", "/tour/course"]},
-    {"link": "/cs/review", "sublink": []},
+    {"link": "/review", "sublink": []},
     {"link": "/cs", "sublink": ["/cs/notice/list", "/cs/qna/list"]}
   ],
   "FooterImgDesc": ["카카오 톡", "카카오\n스토리", "블로그", "유튜브", "밴드"],
