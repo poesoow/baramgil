@@ -40,6 +40,7 @@ export default createStore({
       state.displayName = payload.displayName
       state.uid = payload.uid
       state.loginChk =true
+    },
     ReviewRead(state, payload) {
       state.qnaId = payload
     },
