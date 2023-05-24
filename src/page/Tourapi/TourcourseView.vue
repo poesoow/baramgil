@@ -1,13 +1,16 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
-  <Title class="my-14 lg:my-0">여행정보</Title>
+  <Title>
+    바람길
+    <template #subTitle>여행정보</template>
+  </Title>
 
   <div class="w-full">
 
-   <p class="my-12 text-lg lg:text-xl mx-auto">
+  <p class="my-12 text-lg lg:text-xl mx-auto">
       <ul class="flex flex-wrap gap-5 max-w-5xl mx-auto justify-center">
         <li v-for="(area) in areaList" :key="area" @click="selectArea(area.code, area.name); fetchData()"
-          :class="selectAreaCode == area.code && 'bg-[#B799FF] p-1 text-white rounded-md'">
+          :class="selectAreaCode == area.code && 'bg-[#B799FF] px-1 text-white rounded-md'">
           <div>{{ area.name2 }}</div>
         </li>
       </ul>
@@ -104,7 +107,7 @@
         this.areaCode = code
       },
       fetchData() {
-
+        
         // 모든 api에 공통으로 들어가는 부분 수정할 필요없음
         const commonUrl = this.baseURL + 'courseList' + '?serviceKey=' + this.serviceKey + '&MobileOS=' + this.Mobileos + '&MobileApp=AppTest&_type=json'
 
