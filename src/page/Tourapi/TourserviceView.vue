@@ -8,7 +8,7 @@
       <ul class="flex gap-4 mx-auto justify-center">
         <li v-for="contentType in filterContentTypeList" :key="contentType"
           @click="selectContentType(contentType.code, contentType.name); fetchData()"
-          :class="selectContentTypeCode == contentType.code && 'bg-slate-500 text-white rounded-md'"
+          :class="selectContentTypeCode == contentType.code && 'bg-[#B799FF] px-1 text-white rounded-md'"
           >
           {{ contentType.name }}
         </li>
@@ -18,7 +18,7 @@
     <p class="my-12 text-1xl">
       <ul class="flex flex-wrap gap-5 max-w-5xl mx-auto justify-center">
         <li v-for="(area) in areaList" :key="area" @click="selectArea(area.code, area.name); fetchData()"
-          :class="selectAreaCode == area.code && 'bg-slate-500 text-white rounded-md'">
+          :class="selectAreaCode == area.code && 'bg-[#B799FF] px-1 text-white rounded-md'">
           <div>{{ area.name2 }}</div>
         </li>
       </ul>
