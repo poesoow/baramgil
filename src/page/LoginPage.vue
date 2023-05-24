@@ -14,7 +14,7 @@
             <div class="mt-5">
               <input class="w-full p-2.5 border block rounded-lg" type="password" v-model="password" @keyup.enter="login()" placeholder="비밀번호를 입력해주세요" />
             </div>
-            <button @click="login()" class="border my-3 w-full text-white/90 bg-slate-300 hover:bg-slate-500  rounded-lg p-2.5 text-center" type="submit">로그인</button>
+            <button @click="login()" class="border my-3 w-full text-white/90 bg-slate-300 hover:bg-slate-500 rounded-lg p-2.5 text-center" type="submit">로그인</button>
             <p class="text-sm text-slate-500 py-2">회원정보가 없다면 ? <router-link to="/member" class="text-slate-800 hover:underline">회원가입</router-link> 하러가기</p>
           </form>
           {{ email }}
