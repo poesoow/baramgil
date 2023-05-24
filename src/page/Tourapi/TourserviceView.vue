@@ -81,8 +81,8 @@ export default {
       selectAreaName: '',
       // (12: 관광지, 14: 문화시설, 15: 축제공연행사, 25: 여행코스, 28: 레포츠, 32: 숙박, 38: 쇼핑, 39: 음식점)
       contentTypeList: tourData.contentTypelist,
-      selectContentTypeCode: '',
-      selectContentTypeName: '',
+      selectContentTypeCode: '15',
+      selectContentTypeName: '축제공연행사',
       arrange: 'R', 
       selectArrange: 'R', // 정렬구분 (A=제목순, C=수정일순, D=생성일순) 대표이미지가반드시있는정렬(O=제목순, Q=수정일순, R=생성일순)
       totalCount: null,
