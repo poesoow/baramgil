@@ -1,41 +1,49 @@
 <template lang="">
-  <div class="basis-9/12 mx-auto flex flex-wrap justify-between text-xl font-light rounded-sm mb-4">
-    <div class="ml-2 my-1 flex flex-wrap justify-between gap-x-0 border box-border basis-[45%]">
-      <div class="text-base basis-4/12 bg-slate-300 text-center relative after:absolute after:w-3/12 after:h-0.5 after:bg-[#333] after:bottom-1 after:left-2/4 after:-translate-x-2/4">
-        제목
+  <div class="basis-full">
+    <div class="max-w-7xl mx-auto">
+      <div class="w-full flex flex-wrap justify-between text-xl font-light rounded-sm mb-4 border-b border-black">
+        <div class="ml-2 my-1 flex flex-wrap gap-y-6 py-7 px-6 justify-between gap-x-0 border-t border-b border-black box-border basis-full">
+          <div class="flex basis-full gap-x-12 md:gap-x-24">
+            <p class="text-base md:text-lg">제목</p>
+            <div class="text-sm md:text-base">
+              {{ BoardContent.title }}
+            </div>
+          </div>
+          <div class="flex basis-full justify-between">
+            <div class="flex basis-4/12 gap-x-10 md:gap-x-20">
+              <p class="text-base md:text-lg">작성자</p>
+              <div class="text-sm md:text-base">
+                {{ BoardContent.name }}
+              </div>
+            </div>
+            <div class="flex basis-4/12 justify-end items-center">
+              <div class="flex justify-end gap-x-8 md:gap-x-16 text-xs md:text-sm font-extralight">
+                <p>조회수 : {{ BoardContent.hit }}</p>
+                <!-- <p @click.once="GoodChk"><font-awesome-icon icon="fa-thumbs-up" class="cursor-pointer" /> {{ BoardContent.good }}</p>
+                <p @click.once="noGoodChk"><font-awesome-icon icon="fa-thumbs-down" class="cursor-pointer" /> {{ BoardContent.bad }}</p> -->
+                <p>{{ dateTime }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="basis-full px-3 text-sm md:text-base font-light mb-7">
+          <div class="w-full mx-4 my-2.5">
+            {{ BoardContent.content }}
+            <div class="my-7 w-9/12 mx-auto">
+              <img v-if="BoardContent.file" :src="BoardContent.file" :alt="BoardContent.title">
+            </div>
+          </div>
+        </div>
+        <div class="flex w-full justify-end pb-24 gap-x-5 mt-5">
+          <div class="mt-[5px]">
+            <router-link to="/cs/qna/list" class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</router-link>
+          </div>
+          <div class="flex gap-x-5">
+            <router-link to="/cs/qna/modify" class="bg-green-400 hover:bg-green-600 focus:ring-green-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">수정</router-link>
+            <button class="bg-red-400 hover:bg-red-600 focus:ring-red-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Delete">삭제</button>
+          </div>
+        </div>
       </div>
-      <div class="basis-8/12 text-center">
-        {{ BoardContent.title }}
-      </div>
-    </div>
-    <div class="mr-2 my-1 flex flex-wrap justify-between gap-x-0 border box-border basis-[45%]">
-      <div class="text-base basis-4/12 bg-slate-300 text-center relative after:absolute after:w-4/12 after:h-0.5 after:bg-[#333] after:bottom-1 after:left-2/4 after:-translate-x-2/4">
-        작성자
-      </div>
-      <div class="basis-8/12 text-center">
-        {{ BoardContent.name }}
-      </div>
-    </div>
-  </div>
-  <div class="basis-9/12 mx-auto h-80 border text-xl font-light rounded-sm mb-7">
-    <div class="w-full ml-2 my-1">
-      {{ BoardContent.content }}
-      <img v-if="BoardContent.file" :src="BoardContent.file" :alt="BoardContent.title">
-    </div>
-  </div>
-  <div class="basis-9/12 mx-auto flex justify-end gap-x-5 text-sm font-extralight mb-3">
-    <p>조회수 : {{ BoardContent.hit }}</p>
-    <p @click.once="GoodChk"><font-awesome-icon icon="fa-thumbs-up" class="cursor-pointer" /> {{ BoardContent.good }}</p>
-    <p @click.once="noGoodChk"><font-awesome-icon icon="fa-thumbs-down" class="cursor-pointer" /> {{ BoardContent.bad }}</p>
-    <p>{{ dateTime }}</p>
-  </div>
-  <div class="flex basis-9/12 mx-auto justify-end pb-24 gap-x-5 mt-5">
-    <div class="mt-[5px]">
-      <router-link to="/cs/qna/list" class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</router-link>
-    </div>
-    <div class="flex gap-x-5">
-      <router-link to="/cs/qna/modify" class="bg-green-400 hover:bg-green-600 focus:ring-green-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">수정</router-link>
-      <button class="bg-red-400 hover:bg-red-600 focus:ring-red-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Delete">삭제</button>
     </div>
   </div>
 </template>
@@ -61,36 +69,36 @@ export default {
         })
       }
     },
-    GoodChk() {
-      if(this.BoardContent.goodChk){
-        alert("이미 추천 혹은 비추천 하셨습니다.");
-        return;
-      }
-      db.collection("qna").doc(this.$route.query.docId).update({
-        good: this.BoardContent.good + 1,
-        goodChk : true
-      }).then(() => {
-        db.collection("qna").doc(this.$route.query.docId).get().then((data) => {
-          this.BoardContent = data.data()
-        })
-      })
+    // GoodChk() {
+    //   if(this.BoardContent.goodChk){
+    //     alert("이미 추천 혹은 비추천 하셨습니다.");
+    //     return;
+    //   }
+    //   db.collection("qna").doc(this.$route.query.docId).update({
+    //     good: this.BoardContent.good + 1,
+    //     goodChk : true
+    //   }).then(() => {
+    //     db.collection("qna").doc(this.$route.query.docId).get().then((data) => {
+    //       this.BoardContent = data.data()
+    //     })
+    //   })
 
-    },
-    noGoodChk() {
-      if(this.BoardContent.bad){
-        alert("이미 추천 혹은 비추천 하셨습니다.");
-        return;
-      }
-      db.collection("qna").doc(this.$route.query.docId).update({
-        bad: this.BoardContent.bad + 1,
-        badChk : true
-      }).then(() => {
-        db.collection("qna").doc(this.$route.query.docId).get().then((data) => {
-          this.BoardContent = data.data()
-        })
-      })
+    // },
+    // noGoodChk() {
+    //   if(this.BoardContent.bad){
+    //     alert("이미 추천 혹은 비추천 하셨습니다.");
+    //     return;
+    //   }
+    //   db.collection("qna").doc(this.$route.query.docId).update({
+    //     bad: this.BoardContent.bad + 1,
+    //     badChk : true
+    //   }).then(() => {
+    //     db.collection("qna").doc(this.$route.query.docId).get().then((data) => {
+    //       this.BoardContent = data.data()
+    //     })
+    //   })
 
-    },
+    // },
   },
   mounted() {
     if(this.$store.state.qnaId == null){

@@ -81,7 +81,6 @@
       </div>
     </div>
   </div>
-
   <!-- 모바일 버튼 클릭 시 사이드 메뉴-->
   <div class="h-full lg:hidden fixed w-60 -right-60 top-0 p-10 bg-purple-200 duration-500 transition-all z-40"  :class="btnMenu && '!right-0'">
     <div class="mt-10 h-[250px] ml-9">
@@ -109,6 +108,7 @@
 <script>
 import{auth} from '../firebase'
 import Gnb from '@/assets/NavData.json'
+
 export default {
   name: "NavComp",
   data() {

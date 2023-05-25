@@ -1,28 +1,37 @@
 <template>
-  <Title>여행정보</Title>
+  <Title>
+    바람길
+    <template #subTitle>여행정보</template>
+  </Title>
+
+  <!-- 탭메뉴-관광지/행사/숙박 -->
   <div>
     <p class="my-12 text-2xl max-w-5xl mx-auto">
-      <ul class="flex gap-4 mx-auto justify-center">
+      <ul class="flex gap-4 mx-auto justify-center cursor-pointer">
         <li v-for="contentType in filterContentTypeList" :key="contentType"
           @click="selectContentType(contentType.code, contentType.name); fetchData()"
-          :class="selectContentTypeCode == contentType.code && 'bg-slate-500 text-white rounded-md'"
+          :class="selectContentTypeCode == contentType.code && 'bg-[#B799FF] px-1 text-white rounded-md'"
           >
           {{ contentType.name }}
         </li>
       </ul>
     </p>
 
+    <!-- 탭메뉴 -지역선택- -->
     <p class="my-12 text-1xl">
-      <ul class="flex flex-wrap gap-5 max-w-5xl mx-auto justify-center">
+      <ul class="flex flex-wrap gap-5 max-w-5xl mx-auto justify-center cursor-pointer">
         <li v-for="(area) in areaList" :key="area" @click="selectArea(area.code, area.name); fetchData()"
-          :class="selectAreaCode == area.code && 'bg-slate-500 text-white rounded-md'">
+          :class="selectAreaCode == area.code && 'bg-[#B799FF] px-1 text-white rounded-md'">
           <div>{{ area.name2 }}</div>
         </li>
       </ul>
     </p>
+    <!-- 지역탭 클릭하면 선택된 지역 출력 -->
     <p class="text-3xl font-bold max-w-5xl mx-auto px-3 mt-6 flex justify-between">
-      <span><span class=" text-blue-500">{{ selectAreaName }}</span><span> 인기 {{ selectContentTypeName }}</span></span>
-     
+      <span class="ml-5">
+        <span class=" text-blue-500">{{ selectAreaName }}</span>
+        <span> 인기 {{ selectContentTypeName }}</span>
+      </span>
     </p>
 
     <p class="mt-3 mb-14">
@@ -33,7 +42,7 @@
             :to="{name: 'TourdetailView', query: {contentid: data.contentid, contentTypeid: data.contenttypeid}}"
             @click="$store.commit('detailInfo', data)">
               <img :src="data.firstimage" :alt="data.title" class="block w-full rounded-xl h-96">
-              <div>{{ data.title }}</div>
+              <div class="mt-4 text-lg font-black">{{ data.title }}</div>
               <div>{{ simpleAddress(data.addr1) }}</div>
           </router-link>
         </li>
@@ -78,8 +87,8 @@ export default {
       selectAreaName: '',
       // (12: 관광지, 14: 문화시설, 15: 축제공연행사, 25: 여행코스, 28: 레포츠, 32: 숙박, 38: 쇼핑, 39: 음식점)
       contentTypeList: tourData.contentTypelist,
-      selectContentTypeCode: '',
-      selectContentTypeName: '',
+      selectContentTypeCode: '15',
+      selectContentTypeName: '축제공연행사',
       arrange: 'R', 
       selectArrange: 'R', // 정렬구분 (A=제목순, C=수정일순, D=생성일순) 대표이미지가반드시있는정렬(O=제목순, Q=수정일순, R=생성일순)
       totalCount: null,
