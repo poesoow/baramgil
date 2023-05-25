@@ -126,7 +126,6 @@ export default {
     fetchTotalLength(){
       db.collection("notice").get().then((data) => {
         this.totalLength = data.size
-        console.log(data.size)
       })
     },
     fetchPost(){
