@@ -17,7 +17,7 @@
             <li class="basis-1/12 text-center">추천</li>
             <li class="basis-1/12 text-center">비추천</li>
           </ul>
-          <template v-for="(e,index) in NoticeArray" :key="e">
+          <!-- <template v-for="(e,index) in NoticeArray" :key="e">
             <ul v-if="e.fixed" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
               <li class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
               <li class="basis-1/12 text-center">공지</li>
@@ -28,13 +28,13 @@
               <li class="basis-1/12 text-center">{{ e.good }}</li>
               <li class="basis-1/12 text-center">{{ e.bad }}</li>
             </ul>
-          </template>
+          </template> -->
           <template v-for="(e, index) in dataList" :key="index">
               <ul v-if="calculateNumber(totalLength, perPage, page, index) > 0 && e.fixed == false" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
               <li v-if="e.fixed === true" class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
               <li v-else class="basis-1/12 text-center"></li>
               
-              <li class="basis-1/12 text-center" v-if="e.fixed != true">{{totalLength - index}}</li>
+              <li class="basis-1/12 text-center" v-if="e.fixed != true">{{calculateNumber(totalLength, perPage, page, index)}}</li>
               <li class="basis-3/12 text-center line-clamp-1"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
               <li class="basis-2/12 text-center">{{ e.name }}</li>
               <li class="basis-2/12 text-center">{{ BoardDate(index) }}</li>
@@ -44,7 +44,7 @@
             </ul>  
           </template>
         </div>
-        <div v-if="$store.state.loginToken != null" class="flex justify-end pb-24">
+        <div v-if="$store.state.uid == $store.state.adminUid[0] || $store.state.uid == $store.state.adminUid[1] ||$store.state.uid == $store.state.adminUid[2] ||$store.state.uid == $store.state.adminUid[3] ||$store.state.uid == $store.state.adminUid[4]" class="flex justify-end pb-24">
           <router-link to="/cs/notice/write" class="bg-indigo-400 hover:bg-indigo-600 focus:ring-indigo-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">글쓰기</router-link>
         </div>
       </div>
@@ -54,10 +54,10 @@
         {{ e }}</button>
         <button @click="nextPage" :disabled = "currentPage >= pageCount.totalPage / block">다음</button>
       </div>
-      <!-- {{ pageCount.pagination }}
+      {{ pageCount.pagination }}
       {{ page }}
       {{ currentPage }}
-      {{ pageCount.pagination[0] }} -->
+      {{ pageCount.pagination[0] }}
     </div>
   </div>
 </template>
@@ -80,6 +80,7 @@ export default {
       block: 5,
       NoticeArray : [],
       currentPage: 1,
+      admin: [],
     }
   },
   computed: {
@@ -96,6 +97,13 @@ export default {
       }
       return { totalPage, start, end, pagination }
     },
+    // adminUid() {
+    //   this.admin = db.collection("notice").doc(this.$store.state.adminUid)
+    //   for(let i = 0; i < this.admin.length ; i++){
+    //     this.admin[i]
+    //   }
+    //   return
+    // }
   },
   methods: {
     goToPage(e){
@@ -126,12 +134,11 @@ export default {
     fetchTotalLength(){
       db.collection("notice").get().then((data) => {
         this.totalLength = data.size
-        console.log(data.size)
       })
     },
     fetchPost(){
 
-      let query = db.collection("notice").orderBy("date", "desc").limit(this.perPage)
+      let query = db.collection("notice").orderBy('fixed').orderBy("date", "desc").limit(this.perPage)
       
       if(this.page > 1 && this.lastVisible){
         query = query.startAfter(this.lastVisible);
@@ -157,6 +164,7 @@ export default {
         this.totalLength = this.totalLength - count;
         
         this.lastVisible = data.docs[data.docs.length - 1]
+        console.log(this.lastVisible.id, this.ids)
           
       })
     },
