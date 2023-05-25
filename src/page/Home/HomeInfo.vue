@@ -90,7 +90,6 @@ export default {
       travelInfo = axios.get(commonUrl + contentTypeInfo + areaCodeInfo + arrangeInfo + `&numOfRows=5`)
       travelInfo.then(
         (res) => {
-          console.log(res.data.response.body)
           this.dataList = res.data.response.body.items.item
           this.bodyInfo = res.data.response.body
         }

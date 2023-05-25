@@ -50,8 +50,6 @@ export default {
   methods: {
     handleResize() {
       this.visual = visualViewport.width
-
-      console.log(this.visual)
     },
   },  
   components: {
