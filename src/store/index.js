@@ -11,7 +11,8 @@ export default createStore({
     qnaId: 0,
     reviewId: 0,
     galleryId: 0,
-    data: null
+    data: null,
+    adminUid: ['5Qucezu5dDdxaeZUDQqqTeMalED3','M7LNwyklrBQT7T4qZHeQw1v2ujf2', '212LifFLK8Uut4AWRUiYfHK23iI2', 'Kp1ScKZGP8bAILdzYAm59WkOS923', 'XElftfQLdEbENLxMllrmZycOVUk2']
   },
   getters: {
   },
@@ -43,7 +44,7 @@ export default createStore({
       state.loginChk = true
     },
     ReviewRead(state, payload) {
-      state.qnaId = payload
+      state.reviewId = payload
     },
     detailInfo(state, payload) {
       state.data = payload

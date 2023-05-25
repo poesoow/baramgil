@@ -51,7 +51,8 @@ export default {
       auth.signInWithEmailAndPassword(this.email, this.password).then(((user)=>{
         console.log(user.user)
         sessionStorage.setItem("refreshToken",user.user.refreshToken);
-        sessionStorage.setItem("displayName",user.user.displayName)
+        sessionStorage.setItem("displayName",user.user.displayName);
+        // sessionStorage.setItem("uid", user.user.uid);
         // this.$store.commit("loginToken",user.user.refreshToken)
         this.$store.commit("loginToken", { refreshToken: user.user.refreshToken, uid: user.user.uid });
         this.$router.replace('/')

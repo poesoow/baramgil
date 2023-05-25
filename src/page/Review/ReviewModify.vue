@@ -25,7 +25,7 @@
             <p>{{ fileInfo }}</p>
             <p></p>
           </div>
-          <span><input type="checkbox" v-model="fileDel"> {{ FileNameSplit }}</span>
+          <span><p class="inline-block text-lg">파일제거</p><input type="checkbox" v-model="fileDel" class="mx-1.5">{{ FileNameSplit }}</span>
         </div>
         <div class="w-full flex justify-between">
           <router-link to="/review/list"><button class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-6 text-white font-semibold rounded shadow-md focus:outline-none focus:right-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</button></router-link>
@@ -64,6 +64,8 @@ export default {
       if(this.fileDel){
         storage.ref().child(`images/${this.FileNameSplit}`).delete()
         this.file = ""
+      }else if(this.file){
+        storage.ref().child(`images/${this.FileNameSplit}`).push()
       }
       db.collection("review").doc(this.$store.state.reviewId).update({
         "name": this.name,
@@ -91,9 +93,19 @@ export default {
   },
   computed: {
     FileNameSplit(){
-      const parts = this.file.split("%2F");
-      const fileName = parts[parts.length - 1].split('?')[0]
-      return fileName
+      // const parts = this.file.split("%2F");
+      // const fileName = parts[parts.length - 1].split('?')[0]
+      // return fileName
+      let parts;
+      let fileName;
+
+      if(this.file){
+        parts = this.file.split("%2F");
+        fileName = parts[parts.length - 1].split('?')[0]
+        return fileName
+      } else {
+        return ''
+      }
     }
   }
 }
