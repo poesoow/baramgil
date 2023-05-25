@@ -26,7 +26,11 @@
                   <input v-model="nickname" type="text" placeholder="닉네임을 입력해주세요" class="text-left p-2 w-full">
                 </div>
               </div>
-              <button @click="signUp" class="border my-5 w-full text-white/90 bg-slate-300 hover:bg-slate-500  rounded-lg p-2.5 text-center" type="submit">회원가입</button>
+              <button @click="signUp" class="border my-5 w-full text-white/90 bg-slate-300 hover:bg-slate-500  rounded-lg p-2.5 text-center" type="submit">
+                <router-link to="/">
+                  회원가입
+                </router-link>
+              </button>
             </div>
           </div>
         </div>

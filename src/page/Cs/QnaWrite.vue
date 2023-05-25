@@ -72,7 +72,7 @@ export default {
             "good" : 0,
             "bad" : 0,
             "uid" : this.$store.state.uid,
-            "file" : url
+            "file" : url,
           })
         this.$router.replace("/cs/qna")
           })
