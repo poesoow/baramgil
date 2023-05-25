@@ -11,7 +11,7 @@
       <div v-for="(e, index) in QuestionData" :key="e" class="w-full">
         <div @click="isClick = !isClick; num = index" class="w-full py-[26px] flex items-center justify-between px-[2%] cursor-pointer border-b border-[#d9d9d9]">
           <div class="flex justify-between items-center gap-x-5">
-            <font-awesome-icon icon="q" class="w-5 h-5" />
+            <font-awesome-icon icon="q" class="w-5 h-5 " />
             <p class="text-lg">{{ e }}</p>
           </div>
           <font-awesome-icon :icon="(isClick === true) && (num === index) ? 'chevron-up' : 'chevron-down'" />

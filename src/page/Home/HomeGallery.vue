@@ -1,6 +1,6 @@
 <template>
  <!-- 후기 게시판 / 1회에 4장 슬라이딩 -->
- <div class="w-full bg-gray-100 ">
+ <div class="w-full bg-[#] ">
     <div class="max-w-5xl mx-auto mt-4 px-10 pt-2 pb-8 rounded-lg">
       <p class="text-3xl ml-[3%] mt-4 cursor-pointer">
         <router-link to="/review/list">
@@ -18,7 +18,8 @@
             <p class="tracking-wide mt-1 truncate">제목 : 얘! 뭐가 잘 안되니 ?</p>
           </div>
         </swiper-slide>
-        <p id="slide_index" class="absolute right-[2%] bottom-[6%] sm:right-6 sm:bottom-3 md:right-[1%] md:bottom-[2%] lg:bottom-[2%] xl:mr-6 slide_index">{{ RealIndex }} / {{ SlideLength }}</p>
+        <p id="slide_index" class="absolute right-[2%] bottom-[6%] sm:right-6 sm:bottom-3 md:right-[1%] md:bottom-[2%] lg:bottom-[2%] xl:mr-6 slide_index">
+          {{ RealIndex }} / {{ SlideLength }}</p>
         <!-- md:right-[1%] -->
       </swiper>
       <div v-for="(e, index) in 4" :key="e" class="sm:hidden px-5 text-center pb-16 rounded-xl">
@@ -39,9 +40,7 @@ export default {
   name: "HomeView",
   data() {
     return {
-     
       Modules: [Navigation, Pagination, Autoplay],
-
       // 스와이퍼 변수
       SlideLength: 0,
       RealIndex: 1

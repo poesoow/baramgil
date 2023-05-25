@@ -16,7 +16,6 @@
           <!-- 탭메뉴 -->
           <ul class="flex justify-between ml-0.5">
             <li v-for="e in data.area" :key="e" class="shrink-0 text-sm md:text-lg  duration-500 transition-all cursor-pointer">{{ e.name2 }}</li>
-            <!-- [li]에 라우터 링크? -->
           </ul>
         </div>
       </div>
@@ -26,10 +25,14 @@
           <div v-for="(e, index) in 4" :key="e"
             class="h-64 mb-7 rounded-md duration-[600] transition-all basis-[50%] last-of-type:hidden last-of-type:xl:block odd:basis-[25%] first-of-type:basis-[25%] 
             xl:basis-[24%] xl:first-of-type:basis-[24%] xl:last-of-type:basis-[24%] xl:odd:basis-[24%]">
-            <img :src="require(`../../assets/images/travelInfo/info${index+1}.gif`)" alt="이미지" class="mx-auto p-2 w-full h-full">
+            <img :src="require(`../../assets/images/travelInfo/info${index+1}.gif`)" alt="이미지" class="mx-auto px-2 w-full h-full">
           </div>
         </div>
-        <p class="text-right mr-[1%]"><button>더보기 +</button></p>
+        <p class="text-right mr-[1%]">
+          <router-link to="/tour/info" class="h-full pl-3 pr-2 pb-2 pt-3 text-xl">
+            더보기 +
+          </router-link>
+        </p>
       </div>
     </div>
   </div>

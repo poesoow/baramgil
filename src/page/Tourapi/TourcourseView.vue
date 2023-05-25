@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
-  <Title class="my-14 lg:my-0">여행정보</Title>
+  <Title class="my-14 lg:my-0">여행코스</Title>
 
   <div class="w-full">
 
@@ -13,8 +13,6 @@
       </ul>
     </p>
     <div class="max-w-5xl mx-auto text-center pb-4 animate-fade-up animate-once animate-duration-[1500ms] animate-delay-[1ms] animate-ease-linear animate-normal animate-fill-forwards">
-      <!-- 서브타이틀 애니메이션 
-            tailwind.config.js 파일에서 클래스 값 수정 -->
       <p class="my-7 text-4xl">지역 숨은 명소</p>
       <p class="text-2xl mt-2">지역주민이 추천하는 숨은 명소입니다 !!</p>
     </div>
