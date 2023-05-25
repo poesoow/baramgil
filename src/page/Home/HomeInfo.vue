@@ -87,7 +87,7 @@ export default {
       // 조건문으로 아래 페이지 번호를 눌렀을 때는 코드 실행 안하도록 함
       
       let travelInfo;
-      travelInfo = axios.get(commonUrl + contentTypeInfo + areaCodeInfo + arrangeInfo + `&numOfRows=5`)
+      travelInfo = axios.get(commonUrl + contentTypeInfo + areaCodeInfo + arrangeInfo + `&numOfRows=4`)
       travelInfo.then(
         (res) => {
           this.dataList = res.data.response.body.items.item
