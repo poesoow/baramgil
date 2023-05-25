@@ -7,24 +7,22 @@
           여행 후기
         </router-link>
       </p>
-      <swiper :slides-per-view="3" :space-between="20" slides-per-group="3" @swiper="onSlide" @slideChange="onSlideChange"
+      <!-- @swiper="onSlide" @slideChange="onSlideChange" -->
+      <swiper :slides-per-view="3" :space-between="20" slides-per-group="3" 
         :pagination="{ clickable: true, type: 'progressbar' }" :modules="Modules" :autoplay="true && { delay: 3000 }"
         :loop="true" :navigation="true" class="hidden sm:block px-5 text-center pb-16 rounded-xl ">
-        <swiper-slide v-for="(e, index) in 12" :key="e"
+        <swiper-slide v-for="(e) in ReviewList" :key="e"
           class="cursor-pointer rounded-2xl mt-8 h-auto hover:-mt-10 duration-500 transition-all  w-full ">
           <div class="w-full h-auto ">
-            <img :src="require(`../../assets/images/slide/slide${index + 1}.jpg`)" alt="여행후기 사진"
+            <img :src="e.file" :alt="e.title"
               class="w-full h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] mx-auto rounded-2xl duration-500 transition-all">
-            <p class="tracking-wide mt-1 truncate">제목 : 얘! 뭐가 잘 안되니 ?</p>
+            <p class="tracking-wide mt-1 truncate">{{ e.title }}</p>
           </div>
         </swiper-slide>
-        <p id="slide_index" class="absolute right-[2%] bottom-[6%] sm:right-6 sm:bottom-3 md:right-[1%] md:bottom-[2%] lg:bottom-[2%] xl:mr-6 slide_index">
-          {{ RealIndex }} / {{ SlideLength }}</p>
-        <!-- md:right-[1%] -->
       </swiper>
-      <div v-for="(e, index) in 4" :key="e" class="sm:hidden px-5 text-center pb-16 rounded-xl">
-         <img :src="require(`../../assets/images/slide/slide${index + 1}.jpg`)" alt="여행후기 사진" class="w-[80%] h-[300px] mx-auto ">
-         <p class="mt-6">최저 해상도일 때 떨어지게</p>
+      <div v-for="(e) in ReviewList" :key="e" class="sm:hidden px-5 text-center pb-16 rounded-xl">
+         <img :src="e.file" :alt="e.title" class="w-[80%] h-[300px] mx-auto ">
+         <p class="mt-6">{{ e.title }}</p>
       </div>
     </div>
   </div>
@@ -36,14 +34,17 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Pagination, Autoplay } from 'swiper';
+import { db } from "../../firebase"
+
 export default {
   name: "HomeView",
   data() {
     return {
       Modules: [Navigation, Pagination, Autoplay],
       // 스와이퍼 변수
-      SlideLength: 0,
-      RealIndex: 1
+      SlideLength: 12,
+      RealIndex: 1,
+      ReviewList: null
     }
   },
   components: {
@@ -52,12 +53,30 @@ export default {
   },
   methods: {
     // 스와이퍼의 현재 페이지 위치와 전체 개수 값 계산
-    onSlide(swiper) {
-      this.SlideLength = swiper.slides.length
+    // onSlide(swiper) {
+    //   this.SlideLength = swiper.slides.length
+    //   // this.SlideLength = this.ReviewList.length
+    // },
+    // onSlideChange(swiper) {
+    //   this.RealIndex = swiper.realIndex + 1
+    // },
+    fetchPost() {
+      const query = db.collection("review").orderBy("date", "desc").limit(12)
+      query.get().then((data) => {
+        const items = [];
+        const ids = [];
+
+        data.forEach((e) => {
+          ids.push(e.id);
+          items.push(e.data())
+          console.log(items)
+        })
+        this.ReviewList = items;
+      })
     },
-    onSlideChange(swiper) {
-      this.RealIndex = swiper.realIndex + 1
-    }
+  },
+  mounted() {
+    this.fetchPost()
   },
 
 }

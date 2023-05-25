@@ -6,21 +6,21 @@
   <!-- 햄버거 아이콘 -->
 
   <!-- 전체 네비게이션 시작 -->
-  <div class="w-full lg:h-[120px] z-10 lg:sticky top-0 bg-white ">
+  <div class="w-full h-full z-10 lg:sticky top-0 bg-white  duration-300 transition-all">
     <div class="max-w-5xl mx-auto">
       <div class="mr-[2%] flex justify-end">
         <!-- 사이트 로고 -->
         <router-link to="/" class="mx-auto ml-[44%] sm:ml-[46%] md:hidden ">
           <img :src="require(`../assets/images/logo.png`)" alt="사이트 로고"
-          class="w-[200px] h-[100px] -ml-[10%] sm:-ml-[15%] mt-4 duration-300 transition-all">
+          class="w-[200px] h-[90px] -ml-[25%] sm:-ml-[11%] mt-4 duration-300 transition-all">
         </router-link>
         <!-- 사이트 로고 -->
 
         <!-- 네비게이션 Lnb -->
-        <div class="text-xl lg:text-xl md:ml-[30%] absolute top-[65px] left-[3%] md:top-0 md:static py-4 mt-4 sm:mt-24 md:mt-0">
-          <ul class="flex gap-x-4 pb-3 pr-1">
-            <li v-if="$store.state.loginChk == false" style="text-decoration-thickness: 1px;" class="hover:underline hover:underline-offset-4 font-semibold cursor-pointer px-3 pt-1.5">
-              <router-link :to="'/login'" class="block h-full px-2.5 pt-1.5">로그인</router-link>
+        <div class="md:ml-[30%] lg:mr-[2%] left-[3%] md:top-0 md:static duration-500 transition-all cursor-pointer py-4 mt-4">
+          <ul class="flex gap-x-10 pb-3 pr-2  ">
+            <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold relative">
+              <router-link to="/login" class="block h-full px-2.5 pt-1.5"><font-awesome-icon icon="lock" /> 로그인</router-link>
             </li>
             <li v-if="$store.state.loginChk == false && 'hidden'" style="text-decoration-thickness: 1px;" class="hover:underline hover:underline-offset-4 font-semibold cursor-pointer mt-1.5">
               <router-link :to="'/signup'"  class="block h-full px-2 pt-1.5">회원가입</router-link>
@@ -33,7 +33,10 @@
             </li>
           </ul>
         </div>
-        <!-- 네비게이션 Lnb -->
+        <div class="py-4 mt-4">
+          글자크기
+          <span>+</span><span>-</span> 
+        </div>
       </div>
 
       <!-- 네비게이션 Gnb -->
@@ -57,11 +60,10 @@
                 @mouseout="SubMenuIndex = null"
                 @mouseover="SubMenuIndex = index; Subfunction(index)">
                 <router-link :to="SubMenuLink[index].link"  class="block h-full">{{ e }}</router-link>
-                <ul class="absolute h-0 overflow-hidden z-20 -mt-1 -ml-[9px] rounded-b-md bg-white transition-all duration-700 sub_list" :style="SubMenuIndex == index && isSubMenu">
+                <ul class="absolute h-0 overflow-hidden z-20 mt-[1px] -ml-[9px] rounded-b-md bg-white transition-all duration-700 sub_list" :style="SubMenuIndex == index && isSubMenu">
                 <template v-for="(el, index2) in SubList[index]" :key="index2">
                   <!-- 오버시 나타나는 submenu li들 -->
-                    <li v-if="(index == 1) || (index == 3)" 
-                    class="text-[15px] text-center first-of-type:mt-0  hover:bg-purple-500 hover:text-white text-xl cursor-pointer rounded">
+                    <li v-if="(index == 1) || (index == 3)" class="text-[15px] text-center first-of-type:mt-0 mt-3 px-1 py-0.5 w-24 hover:bg-purple-500 hover:text-white text-lg cursor-pointer">
                     <router-link :to="SubMenuLink[index].sublink[index2]" class="px-1 md:px-4 pb-1 pt-[10px] block h-full">{{ el }}</router-link>
                     </li>
                   </template>
@@ -90,10 +92,9 @@
           @mouseout="SubMenuIndex2 = null"
           @mouseover="SubMenuIndex2 = index; Subfunction2(index)">
           <router-link :to="SubMenuLink[index].link" class="block h-full">{{ e }}</router-link>
-          <!-- 오버 시 서브메뉴 ul -->
-          <ul class="h-0 overflow-hidden mt-1 ml-[3px] rounded-b-md transition-all duration-700 m_sub_list" :style="SubMenuIndex2 == index && isSubMenu2">
+          <ul class="h-0 overflow-hidden mt-3 ml-[3px] rounded-b-md transition-all duration-700 m_sub_list" :style="SubMenuIndex2 == index && isSubMenu2">
             <template v-for="(el, index2) in SubList[index]" :key="index2">
-              <li v-if="(index == 1) || (index == 3)" class="text-[15px] text-center first-of-type:mt-0 mt-1 w-full text-lg">
+              <li v-if="(index == 1) || (index == 3)" class="text-[15px] text-center first-of-type:mt-0 mt-3 px-1 py-0.5 w-full text-lg">
                 <router-link :to="SubMenuLink[index].sublink[index2]" class="block h-full py-1 hover:bg-white">{{ el }}</router-link>
               </li>
             </template>
@@ -102,8 +103,6 @@
       </ul>
     </div>
   </div>
-  <!-- 모바일 메뉴-->
- 
 </template>
 <script>
 import{auth} from '../firebase'
