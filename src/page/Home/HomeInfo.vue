@@ -28,7 +28,7 @@
             <img :src="e.firstimage" :alt="e.title" class="mx-auto p-2 w-full h-full">
           </div>
         </div>
-        <p class="text-right mr-[1%]"><router-link to="/tour">더보기 +</router-link></p>
+        <p class="text-right mr-[1%]"><router-link to="/tour" class="block h-full pl-3 pr-2 pb-2 pt-3 text-xl">더보기 +</router-link></p>
       </div>
     </div>
   </div>

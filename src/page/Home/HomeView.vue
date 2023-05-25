@@ -1,5 +1,5 @@
 <template>
-  <HomeBanner class="md:-mt-7 lg:-mt-0"/>
+  <HomeBanner />
   <HomeInfo />
   <HomeNotice />
   <HomeGallery />
