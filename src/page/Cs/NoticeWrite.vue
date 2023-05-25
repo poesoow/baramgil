@@ -97,7 +97,8 @@ export default {
           "good" : 0,
           "bad" : 0,
           "uid" : this.$store.state.uid,
-          "fixed" : this.fixed
+          "fixed" : this.fixed,
+          "file" : ""
         })
         this.$router.replace("/cs/notice")
       }

@@ -35,10 +35,10 @@
           </div>
         </div>
         <div class="flex w-full justify-end pb-24 gap-x-5 mt-5">
-          <div class="mt-[5px]">
+          <div class="flex">
             <router-link to="/cs/qna/list" class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</router-link>
           </div>
-          <div class="flex gap-x-5">
+          <div v-if="$store.state.uid == BoardContent.uid" class="flex gap-x-5">
             <router-link to="/cs/qna/modify" class="bg-green-400 hover:bg-green-600 focus:ring-green-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">수정</router-link>
             <button class="bg-red-400 hover:bg-red-600 focus:ring-red-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Delete">삭제</button>
           </div>
@@ -48,7 +48,7 @@
   </div>
 </template>
 <script>
-import { db } from "../../firebase"
+import { db, storage } from "../../firebase"
 
 export default {
   name: "QnaRead",
@@ -62,11 +62,18 @@ export default {
     Delete(){
       let msg = confirm("삭제된 데이터는 복구할 수 없습니다. /r/r 삭제하시겠습니까?");
       if(msg){
-        console.log("!!")
-        db.collection("qna").doc(this.$route.query.docId).delete().then(() => {
-          alert("삭제가 완료 되었습니다.")
-          this.$router.replace("/cs/qna")
-        })
+        if(this.BoardContent.file){
+          storage.ref().child(`images/${this.FileNameSplit}`).delete()
+          db.collection("qna").doc(this.$route.query.docId).delete().then(() => {
+            alert("삭제가 완료 되었습니다.")
+            this.$router.replace("/cs/qna")
+          })
+        }else{
+          db.collection("qna").doc(this.$route.query.docId).delete().then(() => {
+            alert("삭제가 완료 되었습니다.")
+            this.$router.replace("/cs/qna")
+          })
+        }
       }
     },
     // GoodChk() {
@@ -128,6 +135,16 @@ export default {
     })
 
   },
+  computed: {
+    FileNameSplit(){
+      const parts = this.BoardContent.file.split("%2F");
+      let fileName = "";
+      if(this.BoardContent.file){
+        fileName = parts[parts.length - 1].split('?')[0]
+      }
+      return fileName
+    }
+  }
   }
 </script>
 <style lang="">
