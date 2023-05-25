@@ -51,12 +51,12 @@ export default {
       selectAreaCode: '',
       selectAreaName: '',
       // (12: 관광지, 14: 문화시설, 15: 축제공연행사, 25: 여행코스, 28: 레포츠, 32: 숙박, 38: 쇼핑, 39: 음식점)
-      selectContentTypeCode: '12',
-      selectContentTypeName: '관광지',
+      selectContentTypeCode: '15',
+      selectContentTypeName: '축제공연행사',
       selectArrange: 'O', // 정렬구분 (A=제목순, C=수정일순, D=생성일순) 대표이미지가반드시있는정렬(O=제목순, Q=수정일순, R=생성일순)
       /* 공통 */
       Mobileos: 'ETC', // OS 구분 : IOS (아이폰), AND (안드로이드), WIN (윈도우폰), ETC(기타)
-      contentTypeId: '14', // 관광타입(12:관광지, 14:문화시설, 15:축제공연행사, 25:여행코스, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
+      contentTypeId: '', // 관광타입(12:관광지, 14:문화시설, 15:축제공연행사, 25:여행코스, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
       cateType: '', // 서비스 분류 코드
     }
   },
@@ -79,7 +79,7 @@ export default {
       const commonUrl = this.baseURL + 'areaBasedList1' + '?serviceKey=' + this.serviceKey + '&MobileOS=' + this.Mobileos + '&MobileApp=AppTest&_type=json'
 
       // 세부 api별 옵션 parameter
-      const contentTypeInfo = '&contentTypeId=' + this.contentTypeId
+      const contentTypeInfo = '&contentTypeId=' + this.selectContentTypeCode
       const areaCodeInfo = '&areaCode=' + this.selectAreaCode
       
       // 총 개수 가져오기
