@@ -1,20 +1,21 @@
 <template>
   <!-- 상단 배너 슬라이드 영역 -->
   <div class="w-full ">
-    <!-- :pagination="{ clickable: true, type:'fraction' }" -->
     <div class="border ">
-      <swiper :slides-per-view="1" @swiper="onSwiper" @slideChange="onSlideChange" :scrollbar="{ draggable: true }"
+      <swiper :slides-per-view="swiperView" @swiper="onSwiper" @slideChange="onSlideChange" :scrollbar="{ draggable: true }"
         :modules="Modules" :autoplay="true && { delay: 3000 }" :loop="true" :navigation="true"
         class="w-full text-center banner-slide">
-        <swiper-slide v-for="e in 11" :key="e" class="w-full cursor-pointer">
-          <img :src="require(`../../assets/images/slide/banner_top.jpg`)" alt="" class="w-full">
+        <swiper-slide v-for="e in dataList" :key="e" class="w-full cursor-pointer">
+          <img :src="e.firstimage" alt="e.title" class="w-[840px] h-[770px]">
         </swiper-slide>
       </swiper>
     </div>
   </div>
   <!-- 상단 배너 슬라이드 영역 -->
 </template>
+
 <script>
+import axios from 'axios'
 import 'swiper/css';
 import 'swiper/css/bundle';
 import 'swiper/css/navigation';
@@ -25,13 +26,65 @@ export default {
   name:"HomeBanner",
   data() {
     return {
-      Modules: [Navigation, Pagination, Autoplay]
+      Modules: [Navigation, Pagination, Autoplay],
+      // api axios 요청관련
+      baseURL: 'https://apis.data.go.kr/B551011/KorService1/',
+      serviceKey: 'vZqohu%2F1a1mKILW%2BslUEpMtWGBv0IvvlkE7zB28hKgPXkvzNMi9%2F2sawykKToWPc%2F%2FNeUM9rnQykkPu%2FLdPlpQ%3D%3D',
+      areaCode: '',
+      dataList: null,
+      contentTypeId: '15',
+      visual: null,
     }
   },
+  computed: {
+    swiperView() {
+      let count;
+      if (this.visual > 1200 ) {
+        count = 3
+      } else {
+        count = 1
+      }
+      return count
+    },
+  },
+  methods: {
+    handleResize() {
+      this.visual = visualViewport.width
+
+      console.log(this.visual)
+    },
+  },  
   components: {
     Swiper,
     SwiperSlide,
-  }
+  },
+  mounted() {
+      // 모든 api에 공통으로 들어가는 부분 수정할 필요없음
+      const commonUrl = this.baseURL + 'areaBasedList1' + '?serviceKey=' + this.serviceKey + '&MobileOS=ETC' + '&MobileApp=AppTest&_type=json'
+
+      // 세부 api별 옵션 parameter
+      const pageInfo = '&numOfRows=' + this.numOfrows + '&pageNo=' + this.pageNo
+      const listInfo = '&listYN=Y'
+      const arrangeInfo = '&arrange=R'
+      const contentTypeInfo = '&contentTypeId=' + this.contentTypeId
+      const areaCodeInfo = '&areaCode=' + this.areaCode
+
+      // axios get 요청으로 사용할 변수 선언
+      let endpointGet;
+
+      endpointGet = axios.get(commonUrl + pageInfo + listInfo + arrangeInfo + contentTypeInfo + areaCodeInfo)
+
+      endpointGet.then(
+        (res) => {
+          this.dataList = res.data.response.body.items.item
+        }
+      ).catch((err) => {
+        console.log(err)
+      })
+
+      this.handleResize()
+      window.addEventListener('resize', this.handleResize);
+  },
 }
 </script>
 <style>
