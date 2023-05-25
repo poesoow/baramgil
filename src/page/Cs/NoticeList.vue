@@ -2,8 +2,9 @@
   <div class="basis-full px-[5%]">
     <div class="max-w-7xl mx-auto">
       <div class="w-full h-11 mx-1.5 box-border flex justify-end gap-x-[15px]">
-        <input type="text" placeholder="검색어를 입력하세요" class="basis-[271px] h-full py-[9px] pl-2 border border-[#555555] box-border rounded-[10px]">
-        <button class="basis-[72px] h-full border rounded-[10px] text-center bg-[#d9d9d9] shadow">버튼</button>
+        <input type="text" placeholder="검색어를 입력하세요" class="basis-[271px] h-full py-[9px] pl-2 pt-3 border border-[#555555] box-border rounded-[10px]"
+        style="font-size:15pt">
+        <button class="basis-[72px] h-full pt-1 border rounded-[10px] text-center bg-[#d9d9d9] shadow mr-2">버튼</button>
       </div>
       <div class="w-full">
         <div class="max-w-7xl mx-auto my-10">
@@ -21,7 +22,11 @@
             <ul v-if="e.fixed" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
               <li class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
               <li class="basis-1/12 text-center">공지</li>
-              <li class="basis-3/12 text-center line-clamp-1"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
+              <li class="basis-3/12 text-center line-clamp-1">
+                <router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">
+                  {{ e.title }}
+                </router-link>
+              </li>
               <li class="basis-2/12 text-center">{{ e.name }}</li>
               <li class="basis-2/12 text-center">{{ BoardDate(index) }}</li>
               <li class="basis-1/12 text-center">{{ e.hit }}</li>
@@ -31,9 +36,10 @@
           </template> -->
           <template v-for="(e, index) in dataList" :key="index">
               <ul v-if="calculateNumber(totalLength, perPage, page, index) > 0 && e.fixed == false" class="flex justify-between border-b text-center py-2 even:bg-gray-50 text-xs sm:text-sm">
-              <li v-if="e.fixed === true" class="basis-1/12 text-center"><font-awesome-icon icon="thumb-tack" /></li>
+              <li v-if="e.fixed === true" class="basis-1/12 text-center">
+                <font-awesome-icon icon="thumb-tack" />
+              </li>
               <li v-else class="basis-1/12 text-center"></li>
-              
               <li class="basis-1/12 text-center" v-if="e.fixed != true">{{calculateNumber(totalLength, perPage, page, index)}}</li>
               <li class="basis-3/12 text-center line-clamp-1"><router-link :to="{ name: 'NoticeRead', query:{ docId: dataId[index] } }" @click="$store.commit('NoticeRead', dataId[index])">{{ e.title }}</router-link></li>
               <li class="basis-2/12 text-center">{{ e.name }}</li>
