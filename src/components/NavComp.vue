@@ -5,6 +5,40 @@
   @click="btnMenu == true ? btnMenu = false : btnMenu = true" />
   <!-- 햄버거 아이콘 -->
 
+
+  <!-- 
+   -->
+    <div class="w-full h-full z-10 lg:sticky top-0 bg-white  duration-300 transition-all">
+      <!-- @click="btnMenu == true ? btnMenu = false : btnMenu = true" -->
+      <div class="max-w-5xl mx-auto">
+        <div class="w-full  mr-[2%] flex justify-end ">
+          <!-- 사이트 로고 -->
+          <router-link to="" class="mx-auto ml-[47%] md:hidden">
+            <img :src="require(`../assets/images/logo.png`)" alt="사이트 로고"
+            class="w-[200px] h-[90px] -ml-[25%] sm:-ml-[11%] mt-4 duration-300 transition-all">
+            <!-- pt-4 sm:-ml-[95%] md:ml-[60%] duration-300 transition-all -->
+          </router-link>
+          <!-- 네비게이션 Lnb -->
+          <div class="md:ml-[30%] lg:mr-[2%] absolute top-[65px] left-[3%] md:top-0 md:static duration-500 transition-all py-4 mt-4">
+            <ul class="flex gap-x-10 pb-3 pr-2  ">
+              <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold relative">
+                <router-link to="/login"><font-awesome-icon icon="lock" /> 로그인</router-link>
+              </li>
+              <li v-else @click="logOut()" class="hover:underline hover:underline-offset-4 font-semibold relative">
+                <router-link to="/"><font-awesome-icon icon="arrow-right-from-bracket" /> 로그아웃</router-link>
+              </li>
+              <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold">
+                <router-link to="/member" ><font-awesome-icon icon="user" /> 회원가입</router-link>
+              </li>
+              <li v-else class="hover:underline hover:underline-offset-4 font-semibold cursor-pointer">
+                <font-awesome-icon icon="user-gear" /> 마이 페이지
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
   <!-- 전체 네비게이션 시작 -->
   <div class="w-full h-full z-10 lg:sticky top-0 bg-white  duration-300 transition-all">
     <div class="max-w-5xl mx-auto">
@@ -17,22 +51,22 @@
         <!-- 사이트 로고 -->
 
         <!-- 네비게이션 Lnb -->
-        <div class="md:ml-[30%] lg:mr-[2%] left-[3%] md:top-0 md:static duration-500 transition-all cursor-pointer py-4 mt-4">
-          <ul class="flex gap-x-10 pb-3 pr-2  ">
-            <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold relative">
-              <router-link to="/login" class="block h-full px-2.5 pt-1.5"><font-awesome-icon icon="lock" /> 로그인</router-link>
-            </li>
-            <li v-if="$store.state.loginChk == false && 'hidden'" style="text-decoration-thickness: 1px;" class="hover:underline hover:underline-offset-4 font-semibold cursor-pointer mt-1.5">
-              <router-link :to="'/signup'"  class="block h-full px-2 pt-1.5">회원가입</router-link>
-            </li>
-            <li v-else @click="logOut" style="text-decoration-thickness: 1px;" class="hover:underline hover:underline-offset-4 font-semibold cursor-pointer px-3 pt-1.5">
-              <router-link to="/"  class="block h-full px-1 pt-1.5">로그 아웃</router-link>
-            </li>
-            <li v-if="$store.state.loginChk == true" style="text-decoration-thickness: 1px;" class="hover:underline hover:underline-offset-4 font-semibold cursor-pointer px-3 pt-1.5">
-              <router-link :to="'/member'"  class="block h-full px-1 pt-1.5">마이 페이지</router-link>
-            </li>
-          </ul>
-        </div>
+         <div class="md:ml-[30%] lg:mr-[2%] absolute top-[65px] left-[3%] md:top-0 md:static duration-500 transition-all py-4 mt-4">
+              <ul class="flex gap-x-10 pb-3 pr-2  ">
+                <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold relative">
+                  <router-link to="/login" class="h-full block"><font-awesome-icon icon="lock" /> 로그인</router-link>
+                </li>
+                <li v-else @click="logOut()" class="hover:underline hover:underline-offset-4 font-semibold relative">
+                  <router-link to="/" class="h-full block"><font-awesome-icon icon="arrow-right-from-bracket" /> 로그아웃</router-link>
+                </li>
+                <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold">
+                  <router-link to="/member"  class="h-full block"><font-awesome-icon icon="user" /> 회원가입</router-link>
+                </li>
+                <li v-else class="hover:underline hover:underline-offset-4 font-semibold cursor-pointer">
+                  <router-link to="/signup" class="h-full block"><font-awesome-icon icon="user-gear" /> 마이 페이지</router-link>
+                </li>
+              </ul>
+            </div>
         <div class="py-4 mt-4">
           글자크기
           <span>+</span><span>-</span> 
@@ -84,25 +118,28 @@
     </div>
   </div>
   <!-- 모바일 버튼 클릭 시 사이드 메뉴-->
-  <div class="h-full lg:hidden fixed w-60 -right-60 top-0 p-10 bg-purple-200 duration-500 transition-all z-40"  :class="btnMenu && '!right-0'">
-    <div class="mt-10 h-[250px] ml-9">
-      <ul class="lg:hidden w-full mt-10 lg:mt-0 md:mt-20 sm:mt-10 duration-500 transition-all text-center">
-        <li class="-tracking-widest transition-all duration-500 text-xl leading-9 mt-5"
-          v-for="(e, index) in Gnb" :key="e" :class="SubMenuIndex2 == index"
-          @mouseout="SubMenuIndex2 = null"
-          @mouseover="SubMenuIndex2 = index; Subfunction2(index)">
-          <router-link :to="SubMenuLink[index].link" class="block h-full">{{ e }}</router-link>
-          <ul class="h-0 overflow-hidden mt-3 ml-[3px] rounded-b-md transition-all duration-700 m_sub_list" :style="SubMenuIndex2 == index && isSubMenu2">
-            <template v-for="(el, index2) in SubList[index]" :key="index2">
-              <li v-if="(index == 1) || (index == 3)" class="text-[15px] text-center first-of-type:mt-0 mt-3 px-1 py-0.5 w-full text-lg">
-                <router-link :to="SubMenuLink[index].sublink[index2]" class="block h-full py-1 hover:bg-white">{{ el }}</router-link>
-              </li>
-            </template>
-          </ul>
-        </li>
-      </ul>
+ <div class="h-full lg:hidden fixed w-60 -right-60 top-0 py-10 bg-purple-200 duration-500 transition-all z-40"  :class="btnMenu && '!right-0'">
+      <div class="mt-10 h-[250px] ml-9">
+        <ul class="lg:hidden w-full mt-10 lg:mt-0 md:mt-14 sm:mt-10 duration-500 transition-all">
+          <li class="-tracking-widest transition-all duration-500 text-xl leading-9 mt-5"
+            v-for="(e, index) in Gnb" :key="e" :class="SubMenuIndex2 == index"
+            @mouseout="SubMenuIndex2 = null"
+            @mouseover="SubMenuIndex2 = index; Subfunction2(index)">
+            <router-link :to="SubMenuLink[index].link" class="h-full block">{{ e }}</router-link>
+            <!-- 서브메뉴 ul 리스트 -->
+            <ul class="h-0 overflow-hidden mt-3 rounded-b-md transition-all duration-700 m_sub_list" :style="SubMenuIndex2 == index && isSubMenu2">
+              <template v-for="(el, index2) in SubList[index]" :key="index2">
+              <!-- 오버시 나타나는 submenu li들 -->
+                <li v-if="(index == 1) || (index == 3)" class="text-[15px] first-of-type:mt-0 mt-3 py-0.5 w-full text-lg">
+                  <!-- h-0 overflow-hidden -->
+                  <router-link :to="SubMenuLink[index].sublink[index2]"  class="h-full block">{{ el }}</router-link>
+                </li>
+              </template>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
 </template>
 <script>
 import{auth} from '../firebase'
@@ -135,7 +172,6 @@ export default {
       this.$store.commit('logOutToken')
     },
     updateWindowWidth(){
-      console.log()
       this.windowWidth = window.innerWidth;
     },
     Subfunction(e){
@@ -153,7 +189,6 @@ export default {
     },
     Subfunction2(e){
       if(e != 0){
-        // alert(e)
           const list = document.querySelectorAll(".m_sub_list")[e];
           const length = list.querySelectorAll("li").length;
           this.isSubMenu2 = `height:${length*42}px`
