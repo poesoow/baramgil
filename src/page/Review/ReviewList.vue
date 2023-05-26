@@ -47,11 +47,11 @@
         <button @click="nextPage" :disabled = "currentPage >= pageCount.totalPage / block">다음</button>
       </div>
     </div>
-    {{ $store.state.loginToken }}
+    <!-- {{ $store.state.loginToken }}
     {{ pageCount.pagination }}
     {{ page }}
     {{ currentPage }}
-    {{ pageCount.pagination[0] }}
+    {{ pageCount.pagination[0] }} -->
     </div>
 </template>
 <script>

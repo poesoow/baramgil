@@ -19,15 +19,15 @@
                 </div>
                 <div class="flex justify-between items-center border-b mb-5">
                   <label class="mr-2 w-20 text-left">비밀번호</label>
-                  <input type="password" placeholder="비밀번호 재확인" class="text-left p-2 w-full">
+                  <input type="password" v-model="password2" placeholder="비밀번호 재확인" class="text-left p-2 w-full">
                 </div>
                 <div class="flex justify-between items-center border-b mb-5">
                   <label class="mr-2 w-20 text-left">닉네임</label>
                   <input v-model="nickname" type="text" placeholder="닉네임을 입력해주세요" class="text-left p-2 w-full">
                 </div>
               </div>
-              <button @click="signUp" class="border my-5 w-full text-white/90 bg-slate-300 hover:bg-slate-500  rounded-lg p-2.5 text-center" type="submit">
-                <router-link to="/" class="border">
+              <button @click="signUp" class="border my-5 w-full text-white/90 bg-slate-300 hover:bg-slate-500  rounded-lg text-center" type="submit">
+                <router-link to="/" class="h-full block w-full p-2.5 ">
                   회원가입
                 </router-link>
               </button>
@@ -47,6 +47,7 @@
           return {
               email:"",
               password:"",
+              password2:"",
               nickname:""
           }
       },
@@ -54,11 +55,8 @@
       signUp(){
         auth.createUserWithEmailAndPassword(this.email,this.password).then((result)=>{
           result.user.updateProfile({displayName:this.nickname})
-          console.log(result)
-          console.log(result.user)
         })
       },
-      
     }
   
   }
