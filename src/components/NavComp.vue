@@ -93,7 +93,9 @@
           <li class="-tracking-widest transition-all duration-500 text-xl leading-9 mt-5"
             v-for="(e, index) in Gnb" :key="e"
             @mouseout="SubMenuIndex2 = null"
-            @mouseover="SubMenuIndex2 = index; Subfunction2(index)">
+            @mouseover="SubMenuIndex2 = index; Subfunction2(index)"
+            >
+            <!-- @click="SubMenuIndex2 = index; Subfunction2(index)" -->
             <router-link :to="SubMenuLink[index].link" class="h-full block">{{ e }}</router-link>
             <!-- 서브메뉴 ul 리스트 -->
             <ul class="h-0 overflow-hidden mt-3 rounded-b-md transition-all duration-700 m_sub_list" :style="SubMenuIndex2 == index && isSubMenu2">

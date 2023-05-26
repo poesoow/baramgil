@@ -123,16 +123,16 @@ export default {
   background-size: 65% auto;
   position: absolute;
   top: 50%;
-  right: 7%;
+  right: 8.3%;
   transform: scaleX(-1);
 }
 
 .banner-slide .swiper-button-prev {
-  background: url(../../assets/images/button/arrowLeft.png) no-repeat;
+  background: url(../../assets/images/button/arrowLeft.png) no-repeat; 
   background-size: 65% auto;
   position: absolute;
   top: 50%;
-  left: 7%;
+  left: 8.3%;
 }
 .swiper-slide {
   text-align: center;
