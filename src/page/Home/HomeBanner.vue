@@ -1,15 +1,29 @@
 <template>
   <!-- 상단 배너 슬라이드 영역 -->
   <div class="w-full ">
-    <div class="border ">
-      <swiper :slides-per-view="swiperView" @swiper="onSwiper" @slideChange="onSlideChange" :scrollbar="{ draggable: true }"
-        :modules="Modules" :autoplay="true && { delay: 3000 }" :loop="true" :navigation="true"
-        class="w-full text-center banner-slide">
-        <swiper-slide v-for="e in dataList" :key="e" class="w-full cursor-pointer">
-          <img :src="e.firstimage" alt="e.title" class="w-[840px] h-[770px]">
-        </swiper-slide>
-      </swiper>
-    </div>
+
+    <!-- 근휘님 25일 작업 내용 -->
+    <!-- <swiper :slides-per-view="1" :space-between="10" :centeredSlides="true" :loopFillGroupWithBlank="true" 
+      @swiper="onSwiper" @slideChange="onSlideChange" 
+      :modules="Modules" :autoplay="true && { delay: 3000 }" :loop="true" :navigation="true"
+      class="h-auto text-center banner-slide px-[10%] rounded-md">
+      <swiper-slide v-for="e in 12" :key="e" class=" cursor-pointer w-[30%] ">
+        <img :src="require(`../../assets/images/slide/banner_top.jpg`)" alt="상단 배너" class="w-full h-full ">
+      </swiper-slide>
+    </swiper> -->
+
+    <!-- 우섭님 데이터 연결 -->
+    <swiper :slides-per-view="1" :space-between="50" :centeredSlides="true" :loopFillGroupWithBlank="true"
+      @swiper="onSwiper" @slideChange="onSlideChange"
+      :modules="Modules" :autoplay="true && { delay: 3000 }" :loop="true" :navigation="true"
+      class="h-auto text-center px-[10%] banner-slide">
+      <swiper-slide v-for="e in dataList" :key="e" class="cursor-pointer ">
+        <img :src="e.firstimage" alt="e.title" class="w-full h-[700px]">
+      </swiper-slide>
+    </swiper>
+
+
+
   </div>
   <!-- 상단 배너 슬라이드 영역 -->
 </template>
@@ -86,7 +100,7 @@ export default {
 }
 </script>
 <style>
-.swiper-slide{
+/* .swiper-slide{
   position:relative;
 }  
 .swiper-button-next{
@@ -103,5 +117,27 @@ export default {
   color:white;
   width:20px;
   height:30px;
+} */
+.banner-slide .swiper-button-next {
+  background: url(../../assets/images/button/arrowLeft.png) no-repeat;
+  background-size: 65% auto;
+  position: absolute;
+  top: 50%;
+  right: 7%;
+  transform: scaleX(-1);
+}
+
+.banner-slide .swiper-button-prev {
+  background: url(../../assets/images/button/arrowLeft.png) no-repeat;
+  background-size: 65% auto;
+  position: absolute;
+  top: 50%;
+  left: 7%;
+}
+.swiper-slide {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

@@ -85,7 +85,7 @@ export default {
 }
 </script>
 <style>
-  .swiper-button-next::after,
+.swiper-button-next::after,
 .swiper-button-prev::after {
   display: none;
 }
