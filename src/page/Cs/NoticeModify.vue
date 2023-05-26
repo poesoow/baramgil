@@ -51,7 +51,7 @@ export default {
       isChecked : false,
       fixed : false,
       fileDel: false,
-      fileInfo: ''
+      fileInfo: '',
     }
   },
   methods: {
