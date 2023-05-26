@@ -6,7 +6,7 @@
   <!-- 햄버거 아이콘 -->
 
   <!-- 전체 네비게이션 시작 -->
-  <div class="w-full lg:h-[120px] z-10 lg:sticky top-0 bg-white ">
+  <div class="w-full lg:h-full z-10 lg:sticky top-0 bg-white ">
     <div class="max-w-5xl mx-auto">
       <div class="mr-[2%] flex justify-end">
         <!-- 사이트 로고 -->
