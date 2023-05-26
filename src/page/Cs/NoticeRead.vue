@@ -34,14 +34,18 @@
             </div>
           </div>
         </div>
-        <div class="flex w-full justify-end pb-24 gap-x-5 mt-5">
-          <div class="mt-[5px]">
-            <router-link to="/cs/notice/list" class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</router-link>
-          </div>
-          <div class="flex gap-x-5">
-            <router-link to="/cs/notice/modify" class="bg-green-400 hover:bg-green-600 focus:ring-green-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">수정</router-link>
-            <button class="bg-red-400 hover:bg-red-600 focus:ring-red-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Delete">삭제</button>
-          </div>
+      </div>
+    </div>
+  </div>
+  <div class="basis-full">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex w-full justify-between pb-24 mt-3.5 px-4">
+        <div class="flex">
+          <router-link to="/cs/notice/list" class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</router-link>
+        </div>
+        <div v-if="($store.state.uid == BoardContent.uid) && ($store.state.adminUid !== '')" class="flex gap-x-5">
+          <router-link to="/cs/notice/modify" class="bg-green-400 hover:bg-green-600 focus:ring-green-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">수정</router-link>
+          <button class="bg-red-400 hover:bg-red-600 focus:ring-red-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Delete">삭제</button>
         </div>
       </div>
     </div>
@@ -62,27 +66,40 @@ export default {
     Delete(){
       let msg = confirm("삭제된 데이터는 복구할 수 없습니다. /r/r 삭제하시겠습니까?");
       if(msg){
-        storage.ref().child(`images/${this.FileNameSplit}`).delete()
-        db.collection("notice").doc(this.$route.query.docId).delete().then(() => {
-          alert("삭제가 완료 되었습니다.")
-          this.$router.replace("/cs/notice")
-        })
+        if(this.BoardContent.file){
+          storage.ref().child(`images/${this.FileNameSplit}`).delete()
+          db.collection("notice").doc(this.$route.query.docId).delete().then(() => {
+            alert("삭제가 완료 되었습니다.")
+            this.$router.replace("/cs/notice")
+          })
+        }else{
+          db.collection("notice").doc(this.$route.query.docId).delete().then(() => {
+            alert("삭제가 완료 되었습니다.")
+            this.$router.replace("/cs/notice")
+          })
+        }
       }
     },
     hitUpdate() {
-      const user = auth.currentUser;
-      db.collection("users").doc(user.uid).get().then(doc => {
-        // exists - 해당 정보를 가지고 있는지 여부를 체크
-        if(!doc.exists){
-          db.collection("users").doc(user.uid).set({
-            hitChk: {}
-          }).then(() => {
+      let user;
+      if(user){
+        user = auth.currentUser;
+        db.collection("users").doc(user.uid).get().then(doc => {
+          // exists - 해당 정보를 가지고 있는지 여부를 체크
+          if(!doc.exists){
+            db.collection("users").doc(user.uid).set({
+              hitChk: {}
+            }).then(() => {
+              this.updateHit();
+            })
+          }else{
             this.updateHit();
-          })
-        }else{
-          this.updateHit();
-        }
-      })
+          }
+        })
+      } else {
+        const updateData = this.BoardContent.hit + 1;
+        db.collection("notice").doc(this.$route.query.docId).update({hit : updateData})
+      }
     },
     updateHit() {
       const user = auth.currentUser;

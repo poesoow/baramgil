@@ -50,10 +50,11 @@
   <div class="basis-full">
     <div class="max-w-7xl mx-auto">
       <div class="flex w-full justify-between pb-24 mt-3.5 px-4">
-        <div class="mt-[5px]">
+        <div class="flex">
           <router-link to="/review/list" class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-4 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</router-link>
         </div>
-        <div class="flex gap-x-5">
+        <!-- v-if="$store.state.uid == user.uid" -->
+        <div v-if="$store.state.uid == BoardContent.uid" class="flex gap-x-5">
           <router-link to="/review/modify" class="bg-green-400 hover:bg-green-600 focus:ring-green-400 py-2 px-4 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">수정</router-link>
           <button class="bg-red-400 hover:bg-red-600 focus:ring-red-400 py-2 px-4 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Delete">삭제</button>
         </div>
@@ -62,7 +63,7 @@
   </div>
 </template>
 <script>
-import { db, auth } from "../../firebase"
+import { db, auth, storage } from "../../firebase"
 
 export default {
   name: "ReviewRead",
@@ -106,11 +107,18 @@ export default {
     Delete(){
       let msg = confirm("삭제된 데이터는 복구할 수 없습니다. /r/r 삭제하시겠습니까?");
       if(msg){
-        console.log("!!")
-        db.collection("review").doc(this.$route.query.docId).delete().then(() => {
-          alert("삭제가 완료 되었습니다.")
-          this.$router.replace("/review")
-        })
+        if(this.BoardContent.file){
+          storage.ref().child(`images/${this.FileNameSplit}`).delete()
+          db.collection("review").doc(this.$route.query.docId).delete().then(() => {
+            alert("삭제가 완료 되었습니다.")
+            this.$router.replace("/review")
+          })
+        }else{
+          db.collection("review").doc(this.$route.query.docId).delete().then(() => {
+            alert("삭제가 완료 되었습니다.")
+            this.$router.replace("/review")
+          })
+        }
       }
     },
     // GoodChk() {
