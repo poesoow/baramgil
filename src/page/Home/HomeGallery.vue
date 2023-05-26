@@ -10,9 +10,9 @@
       <!-- @swiper="onSlide" @slideChange="onSlideChange" -->
       <swiper :slides-per-view="3" :space-between="20" slides-per-group="3" 
         :pagination="{ clickable: true, type: 'progressbar' }" :modules="Modules" :autoplay="true && { delay: 3000 }"
-        :loop="true" :navigation="true" class="hidden sm:block px-5 text-center pb-16 rounded-xl ">
+        :loop="true" :navigation="true" class="hidden sm:block px-5 text-center pb-16 rounded-xl">
         <swiper-slide v-for="(e) in ReviewList" :key="e"
-          class="cursor-pointer rounded-2xl mt-8 h-auto hover:-mt-10 duration-500 transition-all  w-full ">
+          class="cursor-pointer rounded-2xl mt-8 h-auto hover:-mt-10 duration-500 transition-all w-full ">
           <div class="w-full h-auto ">
             <img :src="e.file" :alt="e.title"
               class="w-full h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] mx-auto rounded-2xl duration-500 transition-all">
@@ -82,7 +82,7 @@ export default {
 }
 </script>
 <style>
-  .swiper-button-next::after,
+.swiper-button-next::after,
 .swiper-button-prev::after {
   display: none;
 }

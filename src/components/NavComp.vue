@@ -40,11 +40,7 @@
     </div>
 
   <!-- 전체 네비게이션 시작 -->
-<<<<<<< HEAD
-  <div class="w-full lg:h-full z-10 lg:sticky top-0 bg-white ">
-=======
   <div class="w-full h-full z-10 lg:sticky top-0 bg-white  duration-300 transition-all">
->>>>>>> b0ab0504a3d08caa5a06a2cd65ae603d4100fa58
     <div class="max-w-5xl mx-auto">
       <div class="mr-[2%] flex justify-end">
         <!-- 사이트 로고 -->
