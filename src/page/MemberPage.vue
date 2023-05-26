@@ -45,7 +45,6 @@ export default {
         nickname:""
       }
     },
-
 }
 </script>
 <style>

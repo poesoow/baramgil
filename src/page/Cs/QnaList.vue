@@ -35,11 +35,11 @@
         {{ e }}</button>
         <button @click="nextPage" :disabled = "currentPage >= pageCount.totalPage / block">다음</button>
       </div>
-      {{ $store.state.loginToken }}
+      <!-- {{ $store.state.loginToken }}
       {{ pageCount.pagination }}
       {{ page }}
       {{ currentPage }}
-      {{ pageCount.pagination[0] }}
+      {{ pageCount.pagination[0] }} -->
     </div>
   </div>
 </template>
@@ -112,7 +112,6 @@ export default {
     fetchTotalLength(){
       db.collection("qna").get().then((data) => {
         this.totalLength = data.size
-        console.log(data.size)
       })
     },
     fetchPost(){
@@ -135,7 +134,6 @@ export default {
         this.dataId = ids;
         this.dataList = items;
         this.lastVisible = data.docs[data.docs.length - 1]
-        console.log(this.dataList)
 
       })
     },

@@ -47,6 +47,8 @@ export default {
       content: "",
       date: new Date(),
       file: "",
+      fileDel: false,
+      fileInfo: '',
     }
   },
   methods: {
@@ -61,10 +63,32 @@ export default {
       this.$refs.fileInput.click()
     },
     Modify() {
-      if(this.fileDel){
-        storage.ref().child(`images/${this.FileNameSplit}`).delete()
-        this.file = ""
-      }else if(this.file){
+      // if(this.fileDel){
+      //   storage.ref().child(`images/${this.FileNameSplit}`).delete()
+      //   this.file = ""
+      // }else if(this.file){
+      //   storage.ref().child(`images/${this.FileNameSplit}`).push()
+      // }
+      // db.collection("review").doc(this.$store.state.reviewId).update({
+      //   "name": this.name,
+      //   "title": this.title,
+      //   "content": this.content,
+      //   "date": this.date,
+      //   "file": this.file,
+      // }).then(() => {
+      //   alert("수정이 완료되었습니다.")
+      //   this.$router.replace("/review")
+      // })
+      if(this.file){
+        if(this.fileDel){
+          storage.ref().child(`images/${this.FileNameSplit}`).delete()
+          this.file = ""
+        }
+      }
+      // else if(this.file){
+      //   storage.ref().child(`images/${this.FileNameSplit}`).push()
+      // }
+      if((this.file != '')){
         storage.ref().child(`images/${this.FileNameSplit}`).push()
       }
       db.collection("review").doc(this.$store.state.reviewId).update({
