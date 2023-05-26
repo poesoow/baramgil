@@ -6,39 +6,6 @@
   <!-- 햄버거 아이콘 -->
 
 
-  <!-- 
-   -->
-    <div class="w-full h-full z-10 lg:sticky top-0 bg-white  duration-300 transition-all">
-      <!-- @click="btnMenu == true ? btnMenu = false : btnMenu = true" -->
-      <div class="max-w-5xl mx-auto">
-        <div class="w-full  mr-[2%] flex justify-end ">
-          <!-- 사이트 로고 -->
-          <router-link to="" class="mx-auto ml-[47%] md:hidden">
-            <img :src="require(`../assets/images/logo.png`)" alt="사이트 로고"
-            class="w-[200px] h-[90px] -ml-[25%] sm:-ml-[11%] mt-4 duration-300 transition-all">
-            <!-- pt-4 sm:-ml-[95%] md:ml-[60%] duration-300 transition-all -->
-          </router-link>
-          <!-- 네비게이션 Lnb -->
-          <div class="md:ml-[30%] lg:mr-[2%] absolute top-[65px] left-[3%] md:top-0 md:static duration-500 transition-all py-4 mt-4">
-            <ul class="flex gap-x-10 pb-3 pr-2  ">
-              <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold relative">
-                <router-link to="/login"><font-awesome-icon icon="lock" /> 로그인</router-link>
-              </li>
-              <li v-else @click="logOut()" class="hover:underline hover:underline-offset-4 font-semibold relative">
-                <router-link to="/"><font-awesome-icon icon="arrow-right-from-bracket" /> 로그아웃</router-link>
-              </li>
-              <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold">
-                <router-link to="/member" ><font-awesome-icon icon="user" /> 회원가입</router-link>
-              </li>
-              <li v-else class="hover:underline hover:underline-offset-4 font-semibold cursor-pointer">
-                <font-awesome-icon icon="user-gear" /> 마이 페이지
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
   <!-- 전체 네비게이션 시작 -->
   <div class="w-full h-full z-10 lg:sticky top-0 bg-white  duration-300 transition-all">
     <div class="max-w-5xl mx-auto">
@@ -67,10 +34,10 @@
                 </li>
               </ul>
             </div>
-        <div class="py-4 mt-4">
+        <!-- <div class="py-4 mt-4">
           글자크기
           <span>+</span><span>-</span> 
-        </div>
+        </div> -->
       </div>
 
       <!-- 네비게이션 Gnb -->
@@ -88,22 +55,24 @@
               <font-awesome-icon icon="search" class="absolute bottom-1 -right-3 sm:right-1 md:right-2 text-[20px] cursor-pointer"/>
             </div>
             <!-- 오버시 서브 메뉴 -->
-            <ul class="flex justify-center gap-x-16 sm:gap-x-0 md:gap-x-16 lg:gap-x-12 font-bold text-2xl mt-10 sm:my-14 md:mt-14 lg:mt-0 duration-500 transition-all">
-              <li class="sm:px-10 md:px-4 md:pt-1 transition-all duration-500 leading-9 shrink-0 cursor-pointer"
-                v-for="(e, index) in Gnb" :key="e" :class="SubMenuIndex == index"
-                @mouseout="SubMenuIndex = null"
-                @mouseover="SubMenuIndex = index; Subfunction(index)">
-                <router-link :to="SubMenuLink[index].link"  class="block h-full">{{ e }}</router-link>
-                <ul class="absolute h-0 overflow-hidden z-20 mt-[1px] -ml-[9px] rounded-b-md bg-white transition-all duration-700 sub_list" :style="SubMenuIndex == index && isSubMenu">
-                <template v-for="(el, index2) in SubList[index]" :key="index2">
-                  <!-- 오버시 나타나는 submenu li들 -->
-                    <li v-if="(index == 1) || (index == 3)" class="text-[15px] text-center first-of-type:mt-0 mt-3 px-1 py-0.5 w-24 hover:bg-purple-500 hover:text-white text-lg cursor-pointer">
-                    <router-link :to="SubMenuLink[index].sublink[index2]" class="px-1 md:px-4 pb-1 pt-[10px] block h-full">{{ el }}</router-link>
-                    </li>
-                  </template>
-                </ul>
-              </li>
-            </ul>
+             <ul class="hidden md:flex justify-center gap-x-16 sm:gap-x-4 font-bold text-xl md:gap-x-16 w-full mt-10 lg:mt-0 md:mt-14 sm:mt-10 duration-500 transition-all">
+                <li class="sm:px-10 md:px-0 transition-all duration-500 text-xl leading-9 shrink-0 cursor-pointer"
+                  v-for="(e, index) in Gnb" :key="e" :class="SubMenuIndex == index"
+                  @mouseout="SubMenuIndex = null"
+                  @mouseover="SubMenuIndex = index; Subfunction(index)">
+                  <router-link :to="SubMenuLink[index].link" class="h-full block">{{ e }}</router-link>
+                  <!-- ul 태그 rounded-br-2xl rounded-bl-2xl -->
+                  <ul class="absolute h-0 overflow-hidden z-20 mt-[1px] -ml-[9px] rounded-b-md bg-white transition-all duration-700 sub_list" :style="SubMenuIndex == index && isSubMenu">
+                  <template v-for="(el, index2) in SubList[index]" :key="index2">
+                    <!-- 오버시 나타나는 submenu li들 -->
+                      <li v-if="(index == 1) || (index == 3)" class="text-[15px] text-center first-of-type:mt-0 mt-3 px-1 py-0.5 w-24 hover:bg-purple-500 hover:text-white text-lg cursor-pointer">
+                        <!-- h-0 overflow-hidden -->
+                      <router-link :to="SubMenuLink[index].sublink[index2]"  class="h-full block">{{ el }}</router-link>
+                      </li>
+                    </template>
+                  </ul>
+                </li>
+              </ul>
           </div>
         </div>
         <!-- 태블릿부터 나타나는 검색상자 -->
@@ -122,19 +91,17 @@
       <div class="mt-10 h-[250px] ml-9">
         <ul class="lg:hidden w-full mt-10 lg:mt-0 md:mt-14 sm:mt-10 duration-500 transition-all">
           <li class="-tracking-widest transition-all duration-500 text-xl leading-9 mt-5"
-            v-for="(e, index) in Gnb" :key="e" :class="SubMenuIndex2 == index"
+            v-for="(e, index) in Gnb" :key="e"
             @mouseout="SubMenuIndex2 = null"
             @mouseover="SubMenuIndex2 = index; Subfunction2(index)">
             <router-link :to="SubMenuLink[index].link" class="h-full block">{{ e }}</router-link>
             <!-- 서브메뉴 ul 리스트 -->
             <ul class="h-0 overflow-hidden mt-3 rounded-b-md transition-all duration-700 m_sub_list" :style="SubMenuIndex2 == index && isSubMenu2">
-              <template v-for="(el, index2) in SubList[index]" :key="index2">
               <!-- 오버시 나타나는 submenu li들 -->
-                <li v-if="(index == 1) || (index == 3)" class="text-[15px] first-of-type:mt-0 mt-3 py-0.5 w-full text-lg">
+                <li  v-for="(el, index2) in SubList[index]" :key="index2" class="text-[15px] first-of-type:mt-0 mt-3 py-0.5 w-full text-lg">
                   <!-- h-0 overflow-hidden -->
                   <router-link :to="SubMenuLink[index].sublink[index2]"  class="h-full block">{{ el }}</router-link>
                 </li>
-              </template>
             </ul>
           </li>
         </ul>
@@ -188,17 +155,13 @@ export default {
         }
     },
     Subfunction2(e){
-      if(e != 0){
-          const list = document.querySelectorAll(".m_sub_list")[e];
-          const length = list.querySelectorAll("li").length;
-          this.isSubMenu2 = `height:${length*42}px`
-
-            if(list.style.height === '0px'){
-              list.style.height = '90px';
-            }else{
-              list.style.height = '0px';
-            }
-        }
+      const list = document.querySelectorAll(".m_sub_list")[e];
+      const length = list.querySelectorAll("li").length;
+      if((e == 1) || (e == 3)) {
+        this.isSubMenu2 = `height:${length*42}px`
+      } else {
+        this.isSubMenu2 = `height: 0px`
+      }
     }
   },
 }
