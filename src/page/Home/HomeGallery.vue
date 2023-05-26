@@ -1,6 +1,6 @@
 <template>
  <!-- 후기 게시판 / 1회에 4장 슬라이딩 -->
- <div class="w-full bg-[#] ">
+ <div class="w-full">
     <div class="max-w-5xl mx-auto mt-4 px-10 pt-2 pb-8 rounded-lg">
       <p class="text-3xl ml-[3%] mt-4 cursor-pointer">
         <router-link to="/review/list">
@@ -126,9 +126,10 @@ export default {
 /* 후기 게시판 슬라이드 페이지네이션 - 프로그레스 바 기본 값 */
 .swiper-horizontal>.swiper-pagination-progressbar,
 .swiper-pagination-progressbar.swiper-pagination-horizontal {
-  margin-left: 1%;
-  width: 85%;
+  margin-left: 10%;
+  width: 87%;
   border-radius: 40px;
+  margin: 0 auto;
 }
 /* 프로그레스 바 게이지 색상 */
 .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
@@ -152,9 +153,9 @@ export default {
 @media all and (min-width:640px) and (max-width:767px) { 
   .swiper-horizontal>.swiper-pagination-progressbar,
   .swiper-pagination-progressbar.swiper-pagination-horizontal {
-    margin-left: 1%;
+    margin-left: 9.5%;
     margin-top: 348px;
-    width: 85%;
+    width: 80%;
   }
 }
 
@@ -162,18 +163,18 @@ export default {
 @media all and (min-width:768px) and (max-width:1023px) { 
   .swiper-horizontal>.swiper-pagination-progressbar,
   .swiper-pagination-progressbar.swiper-pagination-horizontal {
-    margin-left: 2.5%;
+    margin-left: 9.5%;
     margin-top: 402px;
-    width: 89%;
+    width: 80%;
   }
 }
 /* PC  */
 @media all and (min-width:1024px) and (max-width:1279px) { 
   .swiper-horizontal>.swiper-pagination-progressbar,
   .swiper-pagination-progressbar.swiper-pagination-horizontal {
-    margin-left: 2.5%;
+    margin-left: 9.5%;
     margin-top: 450px;
-    width: 90%;
+    width: 80%;
     transition-duration: 0.5;
   }
 }
@@ -182,9 +183,9 @@ export default {
 @media all and (min-width:1280px) and (max-width:1919px) { 
   .swiper-horizontal>.swiper-pagination-progressbar,
   .swiper-pagination-progressbar.swiper-pagination-horizontal {
-    margin-left: 2%;
+    margin-left: 9.5%;
     margin-top: 500px;
-    width: 88%;
+    width: 80%;
     transition-duration: 0.5;
   }
 }
