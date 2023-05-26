@@ -1,13 +1,13 @@
-<template lang="">
+<template>
   <!-- 공지 / Q&A 게시판 -->
-  <div class="w-full mt-20 mx-auto p-[2%] ">
+  <div class="w-full mt-20 mx-auto p-[2%]">
     <div class="max-w-5xl mx-auto relative">
       <div class="flex flex-nowrap justify-between">
         <h2 class="ml-[3%] mb-8 text-3xl flex gap-6">
           <span @click="choose(0)" class="">공지사항</span>
           <span @click="choose(1)" class=" tracking-widest relative after:absolute after:w-[1px] after:h-[22px] after:bg-gray-900 after:-left-3 after:top-[40%] after:-translate-y-2/4">Q<span class="text-gray-400">&</span>A</span>
         </h2>
-        <p class="text-lg font-light mr-[2%]">
+        <p class="text-lg font-light mr-[4%]">
           <router-link to="/cs/notice/list" class="block pl-3 pr-2 pb-1 pt-2">
             더 보기 +
           </router-link>

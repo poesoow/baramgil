@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full p-[2%] mt-20">
+  <div class="w-full p-[2%] mt-20 ">
     <div class="max-w-5xl mx-auto">
       <div class="w-full mx-auto">
         <h2 class="mb-10 ml-[1%] text-3xl">여행정보</h2>
