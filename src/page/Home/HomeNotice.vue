@@ -14,9 +14,11 @@
         </p>
       </div>
       <div class="max-w-5xl md:w-full md:flex md:flex-nowrap md:justify-between duration-500 transition-all">
-        <div v-for="e in NoticeList" :key="e" class="last-of-type:hidden last-of-type:xl:block xl:odd:mx-8  w-full md:w-[48%] xl:w-[30%] border border-black/30 shadow-md shadow-gray-400 rounded-3xl mx-auto px-[15%] md:px-10 xl:px-[2%] py-[5%] md:py-[8%] lg:py-[7%] xl:py-[5%] mb-10 drop-shadow-xl md:h-[220px] xl:h-[180px]">
-          <p class="mb-4 text-2xl">{{e.title}}</p>
-          <p class="truncate break-all">{{e.content}}</p>
+        <div v-for="(e, index) in NoticeList" :key="e" class="last-of-type:hidden last-of-type:xl:block xl:odd:mx-8  w-full md:w-[48%] xl:w-[30%] border border-black/30 shadow-md shadow-gray-400 rounded-3xl mx-auto px-[15%] md:px-10 xl:px-[2%] py-[5%] md:py-[8%] lg:py-[7%] xl:py-[5%] mb-10 drop-shadow-xl md:h-[220px] xl:h-[180px]">
+          <router-link :to="{ name: 'NoticeRead', query: { docId: NoticeId[index] } }">
+            <p class="mb-4 text-2xl">{{e.title}}</p>
+            <p class="truncate break-all">{{e.content}}</p>
+          </router-link>
         </div>
       </div>
     </div>
@@ -32,6 +34,7 @@ export default {
   data() {
     return {
       NoticeList: [],
+      NoticeId: null,
       perPage: 3,
     }
   },
@@ -57,6 +60,7 @@ export default {
           items.push(e.data())
         })
         this.NoticeList = items;
+        this.NoticeId = ids;
       })
     },
   },

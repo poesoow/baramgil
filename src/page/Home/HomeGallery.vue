@@ -10,14 +10,16 @@
       <!-- @swiper="onSlide" @slideChange="onSlideChange" -->
       <swiper :slides-per-view="3" :space-between="20" slides-per-group="3" 
         :pagination="{ clickable: true, type: 'progressbar' }" :modules="Modules" :autoplay="true && { delay: 3000 }"
-        :loop="true" :navigation="true" class="hidden sm:block px-5 text-center pb-16 rounded-xl">
-        <swiper-slide v-for="(e) in ReviewList" :key="e"
-          class="cursor-pointer rounded-2xl mt-8 h-auto hover:-mt-10 duration-500 transition-all w-full ">
-          <div class="w-full h-auto ">
+        :loop="true" :navigation="true" class="hidden sm:block px-5 text-center pb-16 rounded-xl ">
+        <swiper-slide v-for="(e, index) in ReviewList" :key="e"
+        class="cursor-pointer rounded-2xl mt-8 h-auto hover:-mt-10 duration-500 transition-all  w-full ">
+        <div class="w-full h-auto ">
+          <router-link :to="{ name: 'ReviewRead', query: { docId: ReviewId[index] } }">
             <img :src="e.file" :alt="e.title"
-              class="w-full h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] mx-auto rounded-2xl duration-500 transition-all">
+            class="w-full h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] mx-auto rounded-2xl duration-500 transition-all">
             <p class="tracking-wide mt-1 truncate">{{ e.title }}</p>
-          </div>
+          </router-link>
+        </div>
         </swiper-slide>
       </swiper>
       <div v-for="(e) in ReviewList" :key="e" class="sm:hidden px-5 text-center pb-16 rounded-xl">
@@ -44,7 +46,8 @@ export default {
       // 스와이퍼 변수
       SlideLength: 12,
       RealIndex: 1,
-      ReviewList: null
+      ReviewList: null,
+      ReviewId: null,
     }
   },
   components: {
@@ -69,9 +72,9 @@ export default {
         data.forEach((e) => {
           ids.push(e.id);
           items.push(e.data())
-          console.log(items)
         })
         this.ReviewList = items;
+        this.ReviewId = ids;
       })
     },
   },

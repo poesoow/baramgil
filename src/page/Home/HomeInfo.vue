@@ -25,7 +25,9 @@
           <div v-for="(e) in dataList" :key="e"
             class="h-64 mb-7 rounded-md duration-[600] transition-all basis-[50%] last-of-type:hidden last-of-type:xl:block odd:basis-[25%] first-of-type:basis-[25%] 
             xl:basis-[24%] xl:first-of-type:basis-[24%] xl:last-of-type:basis-[24%] xl:odd:basis-[24%]">
-            <img :src="e.firstimage" :alt="e.title" class="mx-auto p-2 w-full h-full">
+            <router-link :to="{ name: 'TourdetailView', query: { contentid: e.contentid, contentTypeid: e.contenttypeid } }">
+              <img :src="e.firstimage" :alt="e.title" class="mx-auto p-2 w-full h-full">
+            </router-link>
           </div>
         </div>
         <p class="text-right mr-[1%]"><router-link to="/tour" class="block h-full pl-3 pr-2 pb-2 pt-3 text-xl">더보기 +</router-link></p>
