@@ -39,7 +39,7 @@
             class="w-9 h-9 transition-all duration-300 rounded-xl mr-3">
           </li>
         </ul>
-        <p class="text-center text-xl mt-[21px] sm:mt-2 md:-mt-3 md:text-xl md:text-left">CopyRight ⓒ 2023 Baramgil. All Rights Reserved.</p>
+        <p class="text-center text-xl mt-[21px] sm:mt-2 md:-mt-3 md:text-xl md:text-left">CopyRight 2023 Baramgil</p>
       </div>
     </div>
     <!-- 상단으로가는 버튼 -->
