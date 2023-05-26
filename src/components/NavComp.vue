@@ -27,10 +27,10 @@
                   <router-link to="/" class="h-full block"><font-awesome-icon icon="arrow-right-from-bracket" /> 로그아웃</router-link>
                 </li>
                 <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold">
-                  <router-link to="/member"  class="h-full block"><font-awesome-icon icon="user" /> 회원가입</router-link>
+                  <router-link to="/signup"  class="h-full block"><font-awesome-icon icon="user" /> 회원가입</router-link>
                 </li>
                 <li v-else class="hover:underline hover:underline-offset-4 font-semibold cursor-pointer">
-                  <router-link to="/signup" class="h-full block"><font-awesome-icon icon="user-gear" /> 마이 페이지</router-link>
+                  <router-link to="/member" class="h-full block"><font-awesome-icon icon="user-gear" /> 마이 페이지</router-link>
                 </li>
               </ul>
             </div>
