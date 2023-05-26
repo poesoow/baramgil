@@ -27,7 +27,7 @@
                 </div>
               </div>
               <button @click="signUp" class="border my-5 w-full text-white/90 bg-slate-300 hover:bg-slate-500  rounded-lg p-2.5 text-center" type="submit">
-                <router-link to="/">
+                <router-link to="/" class="border">
                   회원가입
                 </router-link>
               </button>
