@@ -60,10 +60,6 @@
         {{ e }}</button>
         <button @click="nextPage" :disabled = "currentPage >= pageCount.totalPage / block">다음</button>
       </div>
-      {{ pageCount.pagination }}
-      {{ page }}
-      {{ currentPage }}
-      {{ pageCount.pagination[0] }}
     </div>
   </div>
 </template>
@@ -170,7 +166,6 @@ export default {
         this.totalLength = this.totalLength - count;
         
         this.lastVisible = data.docs[data.docs.length - 1]
-        console.log(this.lastVisible.id, this.ids)
           
       })
     },
