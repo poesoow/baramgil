@@ -54,7 +54,7 @@
           <router-link to="/review/list" class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-4 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</router-link>
         </div>
         <!-- v-if="$store.state.uid == user.uid" -->
-        <div v-if="$store.state.uid == BoardContent.uid" class="flex gap-x-5">
+        <div v-if="($store.state.uid == BoardContent.uid) && ($store.state.uid != '')" class="flex gap-x-5">
           <router-link to="/review/modify" class="bg-green-400 hover:bg-green-600 focus:ring-green-400 py-2 px-4 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">수정</router-link>
           <button class="bg-red-400 hover:bg-red-600 focus:ring-red-400 py-2 px-4 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Delete">삭제</button>
         </div>
@@ -110,7 +110,7 @@ export default {
         if(this.BoardContent.file){
           storage.ref().child(`images/${this.FileNameSplit}`).delete()
           db.collection("review").doc(this.$route.query.docId).delete().then(() => {
-            alert("삭제가 완료 되었습니다.")
+            alert("삭제가 완료 되었습니다.")  
             this.$router.replace("/review")
           })
         }else{
@@ -164,6 +164,16 @@ export default {
     })
 
   },
+  computed: {
+    FileNameSplit(){
+      const parts = this.BoardContent.file.split("%2F");
+      let fileName = "";
+      if(this.BoardContent.file){
+        fileName = parts[parts.length - 1].split('?')[0]
+      }
+      return fileName
+    }
+  }
   }
 </script>
 <style lang="">

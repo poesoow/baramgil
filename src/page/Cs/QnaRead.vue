@@ -38,7 +38,7 @@
           <div class="flex">
             <router-link to="/cs/qna/list" class="bg-blue-400 hover:bg-blue-600 focus:ring-blue-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">목록</router-link>
           </div>
-          <div v-if="$store.state.uid == BoardContent.uid" class="flex gap-x-5">
+          <div v-if="($store.state.uid == BoardContent.uid) && ($store.state.uid != '')" class="flex gap-x-5">
             <router-link to="/cs/qna/modify" class="bg-green-400 hover:bg-green-600 focus:ring-green-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm">수정</router-link>
             <button class="bg-red-400 hover:bg-red-600 focus:ring-red-400 py-2 px-4  text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Delete">삭제</button>
           </div>
