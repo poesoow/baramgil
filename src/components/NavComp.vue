@@ -7,18 +7,19 @@
 
 
   <!-- 전체 네비게이션 시작 -->
-  <div class="w-full h-full z-10 lg:sticky top-0 bg-white  duration-300 transition-all">
-    <div class="max-w-5xl mx-auto">
+  <div class="w-full h-full z-10 lg:sticky top-0 bg-white"
+    :class="!scroll && ' pt-[50px]'">
+    <div class="max-w-5xl mx-auto   duration-300 transition-all">
       <div class="mr-[2%] flex justify-end">
         <!-- 사이트 로고 -->
-        <router-link to="/" class="mx-auto ml-[44%] sm:ml-[46%] md:hidden ">
+        <router-link to="/" class="block mx-auto ml-[44%] sm:ml-[46%] md:hidden ">
           <img :src="require(`../assets/images/logo.png`)" alt="사이트 로고"
-          class="w-[200px] h-[90px] -ml-[25%] sm:-ml-[11%] mt-4 duration-300 transition-all">
+          class="block w-[200px] h-[90px] -ml-[25%] sm:-ml-[11%] mt-4 duration-300 transition-all">
         </router-link>
         <!-- 사이트 로고 -->
 
         <!-- 네비게이션 Lnb -->
-         <div class="md:ml-[30%] lg:mr-[2%] absolute top-[65px] left-[3%] md:top-0 md:static duration-500 transition-all py-4 mt-4">
+         <div v-show="scroll" class="md:ml-[30%] lg:mr-[2%] absolute top-[65px] left-[3%] md:top-0 md:static duration-500 transition-all py-4 mt-4">
               <ul class="flex gap-x-10 pb-3 pr-2  ">
                 <li v-if="!$store.state.loginChk" class="hover:underline hover:underline-offset-4 font-semibold relative">
                   <router-link to="/login" class="h-full block"><font-awesome-icon icon="lock" /> 로그인</router-link>
@@ -36,14 +37,14 @@
             </div>
         <!-- <div class="py-4 mt-4">
           글자크기
-          <span>+</span><span>-</span> 
+          <span>+</span><span>-</span>
         </div> -->
       </div>
 
       <!-- 네비게이션 Gnb -->
       <div class="w-full flex justify-between sm:mt-10 md:mt-0 lg:mt-0 duration-300 transition-all mt-4 ">
         <router-link to="/" class="hidden md:block duration-700 transition-all md:-mt-1 pl-4">
-          <img :src="require(`../assets/images/logo.png`)" alt="로고" title="로고 이미지" 
+          <img :src="require(`../assets/images/logo.png`)" alt="로고" title="로고 이미지"
           class="md:-mt-[54px] lg:-mt-14 w-[200px] md:w-[220px] h-[120px]">
         </router-link>
         <div class="max-w-3xl mx-auto md:mr-[20%] lg:mr-[5%] lg:pr-0">
@@ -131,10 +132,11 @@ export default {
       logIn: false,
       SubMenuLink: Gnb.MenuLink,
       number : "",
-      text: ""
+      text: "",
+      scroll: true,
     }
   },
-  
+
   methods:{
     logOut(){
       auth.signOut()
@@ -164,7 +166,20 @@ export default {
       } else {
         this.isSubMenu2 = `height: 0px`
       }
+    },
+    hideLogin(){
+      const body = document.querySelector('body').getBoundingClientRect().top;
+      console.log(body)
+      if(body == 0){
+        this.scroll = true
+      } else {
+        this.scroll = false
+      }
     }
+  },
+  mounted() {
+     window.addEventListener("scroll", this.hideLogin)
+    this.hideLogin()
   },
 }
 
