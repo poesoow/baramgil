@@ -22,7 +22,6 @@
       <div class="w-full flex justify-end">
         <button class="bg-slate-400 hover:bg-slate-600 focus:ring-indigo-400 mb-20 py-2 px-6 text-white font-semibold rounded shadow-md focus:outline-none focus:right-2 focus:ring-opacity-75 text-xs sm:text-sm" @click="Write()">완료</button>
       </div>
-      {{ fileRandom }}
     </div>
   </div>
 </template>
@@ -49,16 +48,16 @@ export default {
     GetDate(){
       const date = new Date();
       const RandNum = Math.floor(Math.random() * 999) + 100;
-      const formattedDate = ('' + date.getFullYear()) + '' 
+      const formattedDate = ('' + date.getFullYear()) + ''
         + ('0' + (date.getMonth() + 1)).slice(-2) + ''
-        + ('0' + (date.getDate())).slice(-2) + '_' 
+        + ('0' + (date.getDate())).slice(-2) + '_'
         + ('0' + date.getHours()).slice(-2) + ''
         + ('0' + date.getMinutes()).slice(-2) + ''
         + ('0' + date.getSeconds()).slice(-2) + '' + RandNum
           return formattedDate;
     },
     Write(){
-      
+
       this.file = document.querySelector("#image").files[0];
       if(this.file){
         storage.ref().child("images/" + this.fileRandom).put(this.file).then(() => {
@@ -96,5 +95,5 @@ export default {
 }
 </script>
 <style lang="">
-  
+
 </style>
