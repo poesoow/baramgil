@@ -10,11 +10,11 @@
         <div class="w-full flex justify-center text-xl py-4 gap-x-[5%]">
           <p v-for="e in Tab" :key="e" class="border border-black/30 py-[1%] px-[7%] rounded-xl cursor-pointer hover:bg-black hover:text-white shrink-0">{{ e }}</p>
         </div>
-        <h1 class="text-center text-lg md:text-xl py-7">각 지역별 여행지와 맛집을 소개합니다 !!</h1>
+        <h1 class="text-center text-lg md:text-xl py-7">각 지역별 축제를 소개합니다 !!</h1>
         <div class=" border-t border-b border-black px-[2%] py-1.5 mb-4">
           <!-- 탭메뉴 -->
           <ul class="flex justify-between ml-0.5">
-            <li @click="selectAreaCode = e.code; selectAreaName = e.name; fetchData()" v-for="e in data.area" :key="e" 
+            <li @click="selectAreaCode = e.code; selectAreaName = e.name; fetchData()" v-for="e in data.area" :key="e"
               :class="e.name == selectAreaName && 'bg-[#B799FF] px-1 text-white rounded-md'"
               class="shrink-0 text-sm md:text-lg  duration-500 transition-all cursor-pointer">{{ e.name2 }}</li>
           </ul>
@@ -23,7 +23,7 @@
       <div class="mx-auto p-[2%] border">
         <div class="flex flex-nowrap justify-between basis-full">
           <div v-for="(e) in dataList" :key="e"
-            class="h-64 mb-7 rounded-md duration-[600] transition-all basis-[50%] last-of-type:hidden last-of-type:xl:block odd:basis-[25%] first-of-type:basis-[25%] 
+            class="h-64 mb-7 rounded-md duration-[600] transition-all basis-[50%] last-of-type:hidden last-of-type:xl:block odd:basis-[25%] first-of-type:basis-[25%]
             xl:basis-[24%] xl:first-of-type:basis-[24%] xl:last-of-type:basis-[24%] xl:odd:basis-[24%]">
             <router-link :to="{ name: 'TourdetailView', query: { contentid: e.contentid, contentTypeid: e.contenttypeid } }">
               <img :src="e.firstimage" :alt="e.title" class="mx-auto p-2 w-full h-full">
@@ -55,7 +55,7 @@ export default {
       // (12: 관광지, 14: 문화시설, 15: 축제공연행사, 25: 여행코스, 28: 레포츠, 32: 숙박, 38: 쇼핑, 39: 음식점)
       selectContentTypeCode: '15',
       selectContentTypeName: '축제공연행사',
-      arrange: 'R', 
+      arrange: 'R',
       selectArrange: 'R', // 정렬구분 (A=제목순, C=수정일순, D=생성일순) 대표이미지가반드시있는정렬(O=제목순, Q=수정일순, R=생성일순)
       /* 공통 */
       Mobileos: 'ETC', // OS 구분 : IOS (아이폰), AND (안드로이드), WIN (윈도우폰), ETC(기타)
@@ -84,10 +84,10 @@ export default {
       // 세부 api별 옵션 parameter
       const contentTypeInfo = '&contentTypeId=' + this.selectContentTypeCode
       const areaCodeInfo = '&areaCode=' + this.selectAreaCode
-      const arrangeInfo = '&arrange=' + this.selectArrange      
+      const arrangeInfo = '&arrange=' + this.selectArrange
       // 총 개수 가져오기
       // 조건문으로 아래 페이지 번호를 눌렀을 때는 코드 실행 안하도록 함
-      
+
       let travelInfo;
       travelInfo = axios.get(commonUrl + contentTypeInfo + areaCodeInfo + arrangeInfo + `&numOfRows=4`)
       travelInfo.then(
@@ -103,5 +103,5 @@ export default {
 }
 </script>
 <style>
-  
+
 </style>
