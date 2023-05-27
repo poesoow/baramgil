@@ -11,7 +11,7 @@
             <div class="mt-3">
               <div class="flex justify-between items-center border-b mb-5">
                 <span class="mr-2 w-20 text-left">이메일</span>
-                <span class="text-left p-2 w-full">이메일</span>
+                <span class="text-left p-2 w-full">{{email}}</span>
               </div>
               <div class="flex justify-between items-center border-b mb-5">
                 <label class="mr-2 w-20 text-left">비밀번호</label>
@@ -30,11 +30,11 @@
         </div>
       </div>
     </div>
-   </div> 
+   </div>
   </div>
 </template>
 <script>
-// import { auth } from '@/firebase';
+import { auth } from '@/firebase';
 
 export default {
     name:"MemberPage",
@@ -45,8 +45,17 @@ export default {
         nickname:""
       }
     },
+    mounted() {
+      const user = auth.currentUser;
+      if (user) {
+        this.nickname = user.displayName
+        this.email = user.email
+      } else {
+        // No user is signed in.
+      }
+    },
 }
 </script>
 <style>
-    
+
 </style>
