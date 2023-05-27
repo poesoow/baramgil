@@ -169,7 +169,6 @@ export default {
     },
     hideLogin(){
       const body = document.querySelector('body').getBoundingClientRect().top;
-      console.log(body)
       if(body == 0){
         this.scroll = true
       } else {

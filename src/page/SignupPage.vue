@@ -26,21 +26,19 @@
                   <input v-model="nickname" type="text" placeholder="닉네임을 입력해주세요" class="text-left p-2 w-full">
                 </div>
               </div>
-              <button @click="signUp" class="border my-5 w-full text-white/90 bg-slate-300 hover:bg-slate-500  rounded-lg text-center" type="submit">
-                <router-link to="/" class="h-full block w-full p-2.5 ">
+              <button @click="signUp" class="border my-5 w-full text-white/90 bg-slate-300 hover:bg-slate-500  rounded-lg text-center py-2" type="submit">
                   회원가입
-                </router-link>
               </button>
             </div>
           </div>
         </div>
       </div>
-      
+
     </div>
   </template>
   <script>
   import { auth } from '@/firebase';
-  
+
   export default {
       name:"SignupPage",
       data() {
@@ -52,15 +50,23 @@
           }
       },
       methods:{
-      signUp(){
-        auth.createUserWithEmailAndPassword(this.email,this.password).then((result)=>{
-          result.user.updateProfile({displayName:this.nickname})
-        })
-      },
+        signUp(){
+
+          if(this.password != this.password2){
+            alert('비밀번호가 다릅니다. 다시 입력해주세요')
+            return
+          } else {
+            auth.createUserWithEmailAndPassword(this.email,this.password).then((result)=>{
+              result.user.updateProfile({displayName:this.nickname})
+            })
+            this.$router.replace('/')
+          }
+
+        },
     }
-  
+
   }
   </script>
   <style>
-      
+
   </style>
