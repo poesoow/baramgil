@@ -50,8 +50,6 @@ export default {
       if (user) {
         this.nickname = user.displayName
         this.email = user.email
-      } else {
-        // No user is signed in.
       }
     },
 }
